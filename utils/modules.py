@@ -182,9 +182,36 @@ def get_xiaoqu_list(city='sh'):
 def get_xiaoqu_info_in_subdistict(subdistrict_url):
 	info = dict()
 	h = request_lianjia_url(subdistrict_url)
-	
+	info['total_xiaoqu_number'] = int(h.find_class('total fl')[0].cssselect('span')[0].text)
+	total_pages = eval(h.find_class('page-box house-lst-page-box')[0].attrib['page-data'])['totalPage']
+	info['subdistric_xiaoqu'] = dict()
+	for i in range(1, total_pages + 1):
+		if i == 1:
+			url = subdistrict_url
+		else:
+			url = subdistrict_url + 'pg' + str(i) + '/'
+		h = request_lianjia_url(url=url)
+		xiaoqu_lis = h.find_class('listContent')[0].cssselect('li')
+		for xiaoqu_li in xiaoqu_lis:
+			d = dict()
+			xiaoqu_id = xiaoqu_li.attrib['data-housecode']
+			d['xiaoqu_name'] = xiaoqu_li.cssselect('div.info > div.title > a')[0].text
+			d['sold_in_90d'] = int(xiaoqu_li.cssselect('div.info > div.houseInfo > a')[0].text.replace('90天成交', '')[:-1])
+			d['cur_rental'] = int(xiaoqu_li.cssselect('div.info > div.houseInfo > a')[1].text.replace('套正在出租', ''))
+			d['cur_selling'] = int(xiaoqu_li.cssselect('div.xiaoquListItemRight > div.xiaoquListItemSellCount > a > span')[0].text)
+			avg_price = xiaoqu_li.cssselect('div.xiaoquListItemRight > div.xiaoquListItemPrice > div.totalPrice > span')[0].text
+			if avg_price == '暂无':
+				d['avg_price'] = -1.0
+			else:
+				d['avg_price'] = float(avg_price)
+			year = xiaoqu_li.cssselect('div.info > div.positionInfo')[0].text_content().split('/\xa0')[-1].split('年')[0]
+			if year == '未知':
+				d['year'] = -1
+			else:
+				d['year'] = int(year)
+			info['subdistric_xiaoqu'][xiaoqu_id] = d
 	return info
 
 
-print(get_xiaoqu_list())
-
+sh_xiaoqu = get_xiaoqu_list('sh')
+print(sh_xiaoqu)
