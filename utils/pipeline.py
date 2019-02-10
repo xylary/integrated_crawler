@@ -158,7 +158,7 @@ def get_house_info(house_url):
 	return info
 
 
-def get_xiaoqu_list(city='sh'):
+def get_xiaoqu_list(city='sh', time_interval=1.0):
 	xiaoqu = dict()
 	base_url = "http://{}.lianjia.com".format(city)
 
@@ -172,9 +172,14 @@ def get_xiaoqu_list(city='sh'):
 		h2 = request_lianjia_url(base_url + href_tag)
 		subdistricts = h2.cssselect('body > div.m-filter > div.position > dl:nth-child(2) > dd > div > div:nth-child(2) > a')
 		for subdistrict in subdistricts:
-			xiaoqu[district.text][subdistrict.text] = subdistrict.attrib['href']
+			xiaoqu[district.text][subdistrict.text] = dict()
+			url = base_url + subdistrict.attrib['href']
+			xiaoqu[district.text][subdistrict.text]['subdistrict_url'] = url
+			d = get_xiaoqu_info_in_subdistict(url)
+			xiaoqu[district.text][subdistrict.text]['subdistrict_xiaoqu_number'] = d['total_xiaoqu_number']
+			xiaoqu[district.text][subdistrict.text]['subdistrict_xiaoqu_number'] = d['subdistrict_xiaoqu']
 
-		time.sleep(1.0)
+		time.sleep(time_interval)
 
 	return xiaoqu
 
@@ -184,7 +189,7 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 	h = request_lianjia_url(subdistrict_url)
 	info['total_xiaoqu_number'] = int(h.find_class('total fl')[0].cssselect('span')[0].text)
 	total_pages = eval(h.find_class('page-box house-lst-page-box')[0].attrib['page-data'])['totalPage']
-	info['subdistric_xiaoqu'] = dict()
+	info['subdistrict_xiaoqu'] = dict()
 	for i in range(1, total_pages + 1):
 		if i == 1:
 			url = subdistrict_url
@@ -209,8 +214,26 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 				d['year'] = -1
 			else:
 				d['year'] = int(year)
-			info['subdistric_xiaoqu'][xiaoqu_id] = d
+			info['subdistrict_xiaoqu'][xiaoqu_id] = d
 	return info
+
+
+def get_xiaoqu_detailed_info(xiaoqu_url):
+	info = dict()
+	h = request_lianjia_url(xiaoqu_url)
+	info['xiaoqu_id'] = xiaoqu_url.split('/')[-2]
+	info['xiaoqu_name'] = h.find_class('detailHeader fl')[0].cssselect('h1.detailedTitle')[0].text
+	info['followers'] = int(h.find_class('detailFollowedNum')[0].cssselect('span')[0].text)
+	info['hierarchy'] = h.find_class('fl l-txt')[0].text_content().replace('&nbsp;', ' ')
+	info['unit_price'] = h.find_class('xiaoquUnitPrice')[0].text
+	info_items = h.find_class('xiaoquInfoItem')
+	for info_item in info_items:
+		key = info_item.cssselect('span')[0]
+		value = info_item.cssselect('span')[1]
+		info[key] = value
+	# TODO: add more data points
+	return info
+
 
 
 sh_xiaoqu = get_xiaoqu_list('sh')
