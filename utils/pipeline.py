@@ -3,13 +3,47 @@ import time, datetime
 import requests, re
 from lxml import html
 import lxml.cssselect as cssselect
+import logging
 
 
-def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2):
+logging.basicConfig(filename='logs/utils_pipeline.log', level=logging.DEBUG,
+					format="%(asctime)s - %(levelname)s - %(message)s",
+					datefmt="%m/%d/%Y %H:%M:%S %p")
+
+TIME_INTERVAL = 3
+
+cookies = 'lianjia_uuid=ff8b97a1-5321-4818-b464-32d10b329dea;' \
+		  ' _smt_uid=5c4ed7c8.51da6434;' \
+		  ' UM_distinctid=16893fae8986e6-0bdcd54ba90505-b781636-1fa400-16893fae8996e2;' \
+		  ' _ga=GA1.2.1153017084.1548670923;' \
+		  ' sensorsdata2015jssdkcross=%7B%22distinct' \
+		  '_id%22%3A%22168cfcf981d396-0fd90325cc58d9-b781636-2073600-168cfcf981e53a%22%2C%22%24' \
+		  'device_id%22%3A%22168cfcf981d396-0fd90325cc58d9-b781636-2073600-168cfcf981e53a%22%2C%22' \
+		  'props%22%3A%7B%7D%7D; lianjia_token=2.004e6be3f737ef437d5fc6cac64f09d0de;' \
+		  ' lianjia_ssid=5f67ef20-321b-446b-83bd-8c19d11fe0f0; select_city=310000;' \
+		  ' all-lj=26155dc0ee17bc7dec4aa8e464d36efd; TY_SESSION_ID=abfd3d9b-362d-4d95-a935-874ff54ff654;' \
+		  ' _qzjc=1; Hm_lvt_9152f8221cb6243a53c83b956842be8a=1548670921,1549674470,1549687399,1549856046;' \
+		  ' _jzqc=1; _jzqckmp=1; _gid=GA1.2.421946419.1549856048;' \
+		  ' CNZZDATA1253492439=2028931286-1548666641-%7C1549865384;' \
+		  ' CNZZDATA1255633284=2007666095-1548667154-%7C1549865216;' \
+		  ' CNZZDATA1273627291=1755356700-1549866452-https%253A%252F%252Fsh.lianjia.com%252F%7C1549866452;' \
+		  ' _jzqa=1.3744700095792172500.1548670921.1549865682.1549868681.10;' \
+		  ' _jzqx=1.1549678568.1549868681.4.jzqsr=sh%2Elianjia%2Ecom|jzqct=/ershoufang/.jzqsr=sh%2' \
+		  'Elianjia%2Ecom|jzqct=/xiaoqu/; CNZZDATA1254525948=1822031947-1548670360-%7C1549863767;' \
+		  ' CNZZDATA1255604082=867605303-1548668608-%7C1549865110;' \
+		  ' Hm_lpvt_9152f8221cb6243a53c83b956842be8a=1549868749;' \
+		  ' _qzja=1.760564005.1548670921259.1549865682118.1549868680630.1549868745410.' \
+		  '1549868749497.0.0.0.141.10; _qzjb=1.1549868680630.8.0.0.0; _qzjto=13.3.0;' \
+		  ' _jzqb=1.8.10.1549868681.1'
+
+
+def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2, need_cookie=False):
 	headers = {
 		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
 					  "Chrome/71.0.3578.98 Safari/537.36"
 	}
+	if need_cookie:
+		headers['cookie'] = cookies
 	counter = 0
 	while True:
 		response = requests.request(method, url=url, headers=headers)
@@ -178,6 +212,7 @@ def get_xiaoqu_list(city='sh', time_interval=1.0):
 			d = get_xiaoqu_info_in_subdistict(url)
 			xiaoqu[district.text][subdistrict.text]['subdistrict_xiaoqu_number'] = d['total_xiaoqu_number']
 			xiaoqu[district.text][subdistrict.text]['subdistrict_xiaoqu_number'] = d['subdistrict_xiaoqu']
+			print(xiaoqu[district.text][subdistrict.text])
 
 		time.sleep(time_interval)
 
@@ -196,6 +231,10 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 		else:
 			url = subdistrict_url + 'pg' + str(i) + '/'
 		h = request_lianjia_url(url=url)
+		xiaoqu_list = h.find_class('listContent')
+		if len(xiaoqu_list) == 0:
+			print('Found blank page on url: ', url)
+
 		xiaoqu_lis = h.find_class('listContent')[0].cssselect('li')
 		for xiaoqu_li in xiaoqu_lis:
 			d = dict()
@@ -218,23 +257,49 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 	return info
 
 
-def get_xiaoqu_detailed_info(xiaoqu_url):
+def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
 	info = dict()
-	h = request_lianjia_url(xiaoqu_url)
-	info['xiaoqu_id'] = xiaoqu_url.split('/')[-2]
-	info['xiaoqu_name'] = h.find_class('detailHeader fl')[0].cssselect('h1.detailedTitle')[0].text
-	info['followers'] = int(h.find_class('detailFollowedNum')[0].cssselect('span')[0].text)
-	info['hierarchy'] = h.find_class('fl l-txt')[0].text_content().replace('&nbsp;', ' ')
-	info['unit_price'] = h.find_class('xiaoquUnitPrice')[0].text
-	info_items = h.find_class('xiaoquInfoItem')
-	for info_item in info_items:
-		key = info_item.cssselect('span')[0]
-		value = info_item.cssselect('span')[1]
-		info[key] = value
-	# TODO: add more data points
+	h = request_lianjia_url(xiaoqu_url, need_cookie=need_cookie)
+	print(h.text_content())
+	try:
+		info['id'] = xiaoqu_url.split('/')[-2]
+		info['name'] = h.find_class('detailHeader fl')[0].cssselect('h1.detailedTitle')[0].text
+		info['address'] = h.find_class('detailHeader fl')[0].cssselect('h1.detailedDesc')[0].text
+		info['followers'] = int(h.find_class('detailFollowedNum')[0].cssselect('span')[0].text)
+		info['hierarchy'] = h.find_class('fl l-txt')[0].text_content().replace('&nbsp;', ' ')
+		info['avg_unit_selling_price'] = int(h.find_class('xiaoquUnitPrice')[0].text)
+		info_items = h.find_class('xiaoquInfoItem')
+		year = info_items[0].cssselect('span')[1].text.replace('年建成', '')
+		if year == '未知':
+			info['year'] = 9999
+		else:
+			info['year'] = int(year)
+		info['structure_type'] = info_items[1].cssselect('span')[1].text
+		maintenance_fee = info_items[2].cssselect('span')[1].text.replace('元/平米/月', '')
+		try:
+			info['maintenance_fee'] = float(maintenance_fee)
+		except:
+			info['maintenance_fee'] = -1.0
+		info['property_management_corp'] = info_items[3].cssselect('span')[1].text
+		info['developer'] = info_items[4].cssselect('span')[1].text
+		total_buildings = info_items[5].cssselect('span')[1].text.replace('栋', '')
+		try:
+			info['total_buildings'] = int(total_buildings)
+		except:
+			info['total_buildings'] = -1
+		total_apartments = info_items[6].cssselect('span')[1].text.replace('户', '')
+		try:
+			info['total_apartments'] = int(total_apartments)
+		except:
+			info['total_apartments'] = -1
+		info['nearby_facilities'] = info_items[7].cssselect('span')[1].text
+	except Exception as e:
+		msg = 'Exception encountered when getting info from: ' + xiaoqu_url + ' as: ' + str(e)
+		logging.debug(msg)
+		logging.debug(h.text_content())
+
+	zf = request_lianjia_url(xiaoqu_url.replace('xiaoqu/', 'zufang/c'), need_cookie=need_cookie)
+	es = request_lianjia_url(xiaoqu_url.replace('xiaoqu/', 'ershoufang/c'), need_cookie=need_cookie)
+	cj = request_lianjia_url(xiaoqu_url.replace('xiaoqu/', 'chengjiao/c'), need_cookie=need_cookie)
+	print(es.find_class('agentCardDetail'))
 	return info
-
-
-
-sh_xiaoqu = get_xiaoqu_list('sh')
-print(sh_xiaoqu)
