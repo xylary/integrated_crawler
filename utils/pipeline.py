@@ -4,6 +4,7 @@ import requests, re
 from lxml import html
 import lxml.cssselect as cssselect
 import logging
+import js2py, execjs
 
 
 logging.basicConfig(filename='logs/utils_pipeline.log', level=logging.DEBUG,
