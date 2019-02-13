@@ -36,3 +36,13 @@
 02/13/2019 00:28:15 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
 02/13/2019 00:29:41 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
 02/13/2019 00:29:42 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
+02/13/2019 12:33:16 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 12:33:19 PM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
+02/13/2019 12:36:53 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 12:36:55 PM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
+02/13/2019 12:36:55 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 12:36:55 PM - DEBUG - https://sh.lianjia.com:443 "GET /zufang/c5011000016470/ HTTP/1.1" 200 None
+02/13/2019 12:36:55 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 12:36:56 PM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None
+02/13/2019 12:36:56 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 12:36:56 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None

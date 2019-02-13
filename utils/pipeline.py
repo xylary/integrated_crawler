@@ -272,41 +272,45 @@ def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
 		info['id'] = xiaoqu_id
 		info['name'] = h.find("h1", class_="detailTitle").text
 		info['address'] = h.find("div", class_="detailDesc").text
-		info['followers'] = int(h.find('span', class_='detailFollowedNum')[0].cssselect('span')[0].text)
-		info['hierarchy'] = h.find_class('fl l-txt')[0].text_content().replace('&nbsp;', ' ')
-		info['avg_unit_selling_price'] = int(h.find_class('xiaoquUnitPrice')[0].text)
-		info_items = h.find_class('xiaoquInfoItem')
-		year = info_items[0].cssselect('span')[1].text.replace('年建成', '')
+		info['followers'] = int(h.find('div', class_='detailFollowedNum').find('span').text)
+		info['hierarchy'] = h.find('div', class_='l-txt').text.replace('\xa0', ' ')
+		info['avg_unit_selling_price'] = float(h.find('span', class_='xiaoquUnitPrice').text)
+		contents = h.find_all('span', class_='xiaoquInfoContent')
+		year = contents[0].text.replace('年建成 ', '')
 		if year == '未知':
 			info['year'] = 9999
 		else:
 			info['year'] = int(year)
-		info['structure_type'] = info_items[1].cssselect('span')[1].text
-		maintenance_fee = info_items[2].cssselect('span')[1].text.replace('元/平米/月', '')
+		info['structure_type'] = contents[1].text
+		maintenance_fee = contents[2].text.replace('元/平米/月', '')
 		try:
 			info['maintenance_fee'] = float(maintenance_fee)
 		except:
 			info['maintenance_fee'] = -1.0
-		info['property_management_corp'] = info_items[3].cssselect('span')[1].text
-		info['developer'] = info_items[4].cssselect('span')[1].text
-		total_buildings = info_items[5].cssselect('span')[1].text.replace('栋', '')
+		info['property_management_corp'] = contents[3].text
+		info['developer'] = contents[4].text
+		total_buildings = contents[5].text.replace('栋', '')
 		try:
 			info['total_buildings'] = int(total_buildings)
 		except:
 			info['total_buildings'] = -1
-		total_apartments = info_items[6].cssselect('span')[1].text.replace('户', '')
+		total_apartments = contents[6].text.replace('户', '')
 		try:
 			info['total_apartments'] = int(total_apartments)
 		except:
 			info['total_apartments'] = -1
-		info['nearby_facilities'] = info_items[7].cssselect('span')[1].text
+		info['nearby_facilities'] = contents[7].text
 	except Exception as e:
 		msg = 'Exception encountered when getting info from: ' + xiaoqu_url + ' as: ' + str(e)
 		logging.debug(msg)
 		logging.debug(h.text_content())
 
-	zf = request_lianjia_url(xiaoqu_url.replace('xiaoqu/', 'zufang/c'), need_cookie=need_cookie)
-	es = request_lianjia_url(xiaoqu_url.replace('xiaoqu/', 'ershoufang/c'), need_cookie=need_cookie)
-	cj = request_lianjia_url(xiaoqu_url.replace('xiaoqu/', 'chengjiao/c'), need_cookie=need_cookie)
-	print(es.find_class('agentCardDetail'))
+	zufang_url = xiaoqu_url.replace('xiaoqu/', 'zufang/c')
+	ershoufang_url = xiaoqu_url.replace('xiaoqu/', 'ershoufang/c')
+	chengjiao_url = xiaoqu_url.replace('xiaoqu/', 'chengjiao/c')
+	zf = request_lianjia_url(zufang_url, lib='bs4')
+	es = request_lianjia_url(ershoufang_url, lib='bs4')
+	cj = request_lianjia_url(chengjiao_url, lib='bs4')
 	return info
+
+
