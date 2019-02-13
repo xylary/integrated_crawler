@@ -5,6 +5,7 @@ from lxml import html
 import lxml.cssselect as cssselect
 import logging
 import js2py, execjs
+import bs4
 
 
 logging.basicConfig(filename='logs/utils_pipeline.log', level=logging.DEBUG,
@@ -38,7 +39,7 @@ cookies = 'lianjia_uuid=ff8b97a1-5321-4818-b464-32d10b329dea;' \
 		  ' _jzqb=1.8.10.1549868681.1'
 
 
-def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2, need_cookie=False):
+def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2, need_cookie=False, lib='lxml'):
 	headers = {
 		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
 					  "Chrome/71.0.3578.98 Safari/537.36"
@@ -59,7 +60,12 @@ def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2, ne
 				exit('Retries over {} times, program exit.'.format(str(max_retries)))
 			time.sleep(retries_interval)
 
-	h = html.fromstring(response.content)
+	if lib == 'lxml':
+		h = html.fromstring(response.content)
+	elif lib == 'bs4':
+		h = bs4.BeautifulSoup(response.content, 'lxml')
+	else:
+		h = response.text
 	return h
 
 
@@ -260,13 +266,13 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 
 def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
 	info = dict()
-	h = request_lianjia_url(xiaoqu_url, need_cookie=need_cookie)
-	print(h.text_content())
+	xiaoqu_id = xiaoqu_url.split('/')[-2]
+	h = request_lianjia_url(xiaoqu_url, lib='bs4')
 	try:
-		info['id'] = xiaoqu_url.split('/')[-2]
-		info['name'] = h.find_class('detailHeader fl')[0].cssselect('h1.detailedTitle')[0].text
-		info['address'] = h.find_class('detailHeader fl')[0].cssselect('h1.detailedDesc')[0].text
-		info['followers'] = int(h.find_class('detailFollowedNum')[0].cssselect('span')[0].text)
+		info['id'] = xiaoqu_id
+		info['name'] = h.find("h1", class_="detailTitle").text
+		info['address'] = h.find("div", class_="detailDesc").text
+		info['followers'] = int(h.find('span', class_='detailFollowedNum')[0].cssselect('span')[0].text)
 		info['hierarchy'] = h.find_class('fl l-txt')[0].text_content().replace('&nbsp;', ' ')
 		info['avg_unit_selling_price'] = int(h.find_class('xiaoquUnitPrice')[0].text)
 		info_items = h.find_class('xiaoquInfoItem')
