@@ -30,3 +30,9 @@
 02/11/2019 22:27:30 PM - DEBUG - Exception encountered when getting info from: https://sh.lianjia.com/xiaoqu/5011000016470/ as: list index out of range
 02/11/2019 22:27:30 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
 02/11/2019 22:27:30 PM - DEBUG - https://sh.lianjia.com:443 "GET /zufang/c5011000016470/ HTTP/1.1" 200 None
+02/13/2019 00:27:54 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 00:27:55 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
+02/13/2019 00:28:14 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 00:28:15 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
+02/13/2019 00:29:41 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/13/2019 00:29:42 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000016470/ HTTP/1.1" 200 None
