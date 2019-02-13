@@ -14,38 +14,13 @@ logging.basicConfig(filename='logs/utils_pipeline.log', level=logging.DEBUG,
 
 TIME_INTERVAL = 3
 
-cookies = 'lianjia_uuid=ff8b97a1-5321-4818-b464-32d10b329dea;' \
-		  ' _smt_uid=5c4ed7c8.51da6434;' \
-		  ' UM_distinctid=16893fae8986e6-0bdcd54ba90505-b781636-1fa400-16893fae8996e2;' \
-		  ' _ga=GA1.2.1153017084.1548670923;' \
-		  ' sensorsdata2015jssdkcross=%7B%22distinct' \
-		  '_id%22%3A%22168cfcf981d396-0fd90325cc58d9-b781636-2073600-168cfcf981e53a%22%2C%22%24' \
-		  'device_id%22%3A%22168cfcf981d396-0fd90325cc58d9-b781636-2073600-168cfcf981e53a%22%2C%22' \
-		  'props%22%3A%7B%7D%7D; lianjia_token=2.004e6be3f737ef437d5fc6cac64f09d0de;' \
-		  ' lianjia_ssid=5f67ef20-321b-446b-83bd-8c19d11fe0f0; select_city=310000;' \
-		  ' all-lj=26155dc0ee17bc7dec4aa8e464d36efd; TY_SESSION_ID=abfd3d9b-362d-4d95-a935-874ff54ff654;' \
-		  ' _qzjc=1; Hm_lvt_9152f8221cb6243a53c83b956842be8a=1548670921,1549674470,1549687399,1549856046;' \
-		  ' _jzqc=1; _jzqckmp=1; _gid=GA1.2.421946419.1549856048;' \
-		  ' CNZZDATA1253492439=2028931286-1548666641-%7C1549865384;' \
-		  ' CNZZDATA1255633284=2007666095-1548667154-%7C1549865216;' \
-		  ' CNZZDATA1273627291=1755356700-1549866452-https%253A%252F%252Fsh.lianjia.com%252F%7C1549866452;' \
-		  ' _jzqa=1.3744700095792172500.1548670921.1549865682.1549868681.10;' \
-		  ' _jzqx=1.1549678568.1549868681.4.jzqsr=sh%2Elianjia%2Ecom|jzqct=/ershoufang/.jzqsr=sh%2' \
-		  'Elianjia%2Ecom|jzqct=/xiaoqu/; CNZZDATA1254525948=1822031947-1548670360-%7C1549863767;' \
-		  ' CNZZDATA1255604082=867605303-1548668608-%7C1549865110;' \
-		  ' Hm_lpvt_9152f8221cb6243a53c83b956842be8a=1549868749;' \
-		  ' _qzja=1.760564005.1548670921259.1549865682118.1549868680630.1549868745410.' \
-		  '1549868749497.0.0.0.141.10; _qzjb=1.1549868680630.8.0.0.0; _qzjto=13.3.0;' \
-		  ' _jzqb=1.8.10.1549868681.1'
 
-
-def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2, need_cookie=False, lib='lxml'):
+def request_lianjia_url(url, method='GET', max_retries=5, **kwargs):
 	headers = {
-		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-					  "Chrome/71.0.3578.98 Safari/537.36"
+		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 	}
-	if need_cookie:
-		headers['cookie'] = cookies
+	if 'cookie' in kwargs.keys():
+		headers['cookie'] = kwargs['cookie']
 	counter = 0
 	while True:
 		response = requests.request(method, url=url, headers=headers)
@@ -58,15 +33,33 @@ def request_lianjia_url(url, method='GET', max_retries=5, retries_interval=2, ne
 			counter += 1
 			if counter > max_retries:
 				exit('Retries over {} times, program exit.'.format(str(max_retries)))
-			time.sleep(retries_interval)
+			time.sleep(TIME_INTERVAL * 1.5)
 
-	if lib == 'lxml':
-		h = html.fromstring(response.content)
-	elif lib == 'bs4':
+	if 'lib' in kwargs.keys() and kwargs['lib'] == 'bs4':
 		h = bs4.BeautifulSoup(response.content, 'lxml')
 	else:
-		h = response.text
+		h = html.fromstring(response.content)
 	return h
+
+
+def get_total_pages(h, page_type):
+	if page_type == 'zufang':
+		class_name, attrib_name, sub_attrib_name = 'content__pg', 'data-totalpage', None
+	else:
+		class_name, attrib_name, sub_attrib_name = 'page-box house-lst-page-box', 'page-data', 'totalPage'
+
+	if type(h) is html.HtmlElement:
+		total_pages = eval(h.find_class(class_name)[0].attrib[attrib_name])[sub_attrib_name]
+	elif type(h) is bs4.BeautifulSoup:
+		if sub_attrib_name is None:
+			c = h.find('div', class_=class_name)
+			total_pages = int(c.attrs[attrib_name])
+		else:
+			c = h.find('div', class_=class_name)
+			total_pages = eval(c.attrs[attrib_name])[sub_attrib_name]
+	else:
+		raise AssertionError("Type of the input is not 'bs4.Beautiful' or 'lxml.html.HtmlElement'.")
+	return total_pages
 
 
 def get_record_links(city='sh', record_type='ershoufang', min_pages=1, max_pages=100):
@@ -266,11 +259,13 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 
 def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
 	info = dict()
+	city_abbr = xiaoqu_url[xiaoqu_url.find('//') + 2 : xiaoqu_url.find('.')]
 	xiaoqu_id = xiaoqu_url.split('/')[-2]
 	h = request_lianjia_url(xiaoqu_url, lib='bs4')
 	try:
 		info['id'] = xiaoqu_id
 		info['name'] = h.find("h1", class_="detailTitle").text
+		info['city'] = city_abbr
 		info['address'] = h.find("div", class_="detailDesc").text
 		info['followers'] = int(h.find('div', class_='detailFollowedNum').find('span').text)
 		info['hierarchy'] = h.find('div', class_='l-txt').text.replace('\xa0', ' ')
@@ -312,5 +307,128 @@ def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
 	es = request_lianjia_url(ershoufang_url, lib='bs4')
 	cj = request_lianjia_url(chengjiao_url, lib='bs4')
 	return info
+
+
+def get_xiaoqu_zufang_info(xiaoqu_id, city_abbr):
+	zufang_info = []
+	base_url = 'https://{}.lianjia.com/zufang/c{}/'.format(city_abbr, xiaoqu_id)
+	h = request_lianjia_url(url=base_url, lib='bs4')
+	total_pages = get_total_pages(h, page_type='zufang')
+	items = h.find_all('div', class_='content__list--item')
+	for item in items:
+		info = {}
+		info['zufang_id'] = ''
+		info['zufang_title'] = ''
+		info['city'] = city_abbr
+		info['district'] = ''
+		info['subdistrict'] = ''
+		info['area_sqm'] = ''
+		info['facing'] = ''
+		info['huxing'] = ''
+		info['brand'] = ''
+		info['post_days'] = ''
+		info['rent_rmb_per_month'] = ''
+		zufang_info.append(info)
+	for page in range(2, total_pages + 1):
+		url = base_url.replace('/c', '/pg{}c'.format(page))
+		h = request_lianjia_url(url=url, lib='bs4')
+		items = h.find_all('div', class_='content__list--item')
+		for item in items:
+			info = {}
+			info['zufang_id'] = ''
+			info['zufang_title'] = ''
+			info['city'] = city_abbr
+			info['district'] = ''
+			info['subdistrict'] = ''
+			info['area_sqm'] = ''
+			info['facing'] = ''
+			info['huxing'] = ''
+			info['brand'] = ''
+			info['post_days'] = ''
+			info['rent_rmb_per_month'] = ''
+			zufang_info.append(info)
+	return zufang_info
+
+
+def get_xiaoqu_ershoufang_info(xiaoqu_id, city_abbr):
+	ershoufang_info = []
+	base_url = 'https://{}.lianjia.com/ershoufang/c{}/'.format(city_abbr, xiaoqu_id)
+	h = request_lianjia_url(url=base_url, lib='bs4')
+	total_pages = get_total_pages(h, page_type='ershoufang')
+	items = h.find_all('div', class_='content__list--item')
+	for item in items:
+		info = {}
+		info['zufang_id'] = ''
+		info['zufang_title'] = ''
+		info['city'] = city_abbr
+		info['district'] = ''
+		info['subdistrict'] = ''
+		info['area_sqm'] = ''
+		info['facing'] = ''
+		info['huxing'] = ''
+		info['brand'] = ''
+		info['post_days'] = ''
+		info['rent_rmb_per_month'] = ''
+		ershoufang_info.append(info)
+	for page in range(2, total_pages + 1):
+		url = base_url.replace('/c', '/pg{}c'.format(page))
+		h = request_lianjia_url(url=url, lib='bs4')
+		items = h.find_all('div', class_='content__list--item')
+		for item in items:
+			info = {}
+			info['zufang_id'] = ''
+			info['zufang_title'] = ''
+			info['city'] = city_abbr
+			info['district'] = ''
+			info['subdistrict'] = ''
+			info['area_sqm'] = ''
+			info['facing'] = ''
+			info['huxing'] = ''
+			info['brand'] = ''
+			info['post_days'] = ''
+			info['rent_rmb_per_month'] = ''
+			ershoufang_info.append(info)
+	return ershoufang_info
+
+
+def get_xiaoqu_chengjiao_info(xiaoqu_id, city_abbr):
+	chengjiao_info = []
+	base_url = 'https://{}.lianjia.com/chengjiao/c{}/'.format(city_abbr, xiaoqu_id)
+	h = request_lianjia_url(url=base_url, lib='bs4')
+	total_pages = get_total_pages(h, page_type='chengjiao')
+	items = h.find_all('div', class_='content__list--item')
+	for item in items:
+		info = {}
+		info['zufang_id'] = ''
+		info['zufang_title'] = ''
+		info['city'] = city_abbr
+		info['district'] = ''
+		info['subdistrict'] = ''
+		info['area_sqm'] = ''
+		info['facing'] = ''
+		info['huxing'] = ''
+		info['brand'] = ''
+		info['post_days'] = ''
+		info['rent_rmb_per_month'] = ''
+		chengjiao_info.append(info)
+	for page in range(2, total_pages + 1):
+		url = base_url.replace('/c', '/pg{}c'.format(page))
+		h = request_lianjia_url(url=url, lib='bs4')
+		items = h.find_all('div', class_='content__list--item')
+		for item in items:
+			info = {}
+			info['zufang_id'] = ''
+			info['zufang_title'] = ''
+			info['city'] = city_abbr
+			info['district'] = ''
+			info['subdistrict'] = ''
+			info['area_sqm'] = ''
+			info['facing'] = ''
+			info['huxing'] = ''
+			info['brand'] = ''
+			info['post_days'] = ''
+			info['rent_rmb_per_month'] = ''
+			chengjiao_info.append(info)
+	return chengjiao_info
 
 
