@@ -86,3 +86,485 @@
 02/14/2019 18:54:30 PM - DEBUG - https://sh.lianjia.com:443 "GET /zufang/c5011000016470/ HTTP/1.1" 200 None
 02/14/2019 18:55:07 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
 02/14/2019 18:55:07 PM - DEBUG - https://sh.lianjia.com:443 "GET /zufang/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 21:40:05 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 21:40:06 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:27:49 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:27:50 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:37:49 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:37:50 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:40:03 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:40:04 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:40:39 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:40:40 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:41:20 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:21 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:41:21 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:21 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:41:25 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:25 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:41:40 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:41 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:41:41 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:41 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:41:46 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:46 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:41:50 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:50 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:41:55 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:41:55 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:42:00 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:42:00 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:42:04 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:42:04 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:42:36 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:42:37 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:42:38 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:42:38 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:42:43 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:42:43 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:42:47 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:42:47 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:43:02 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:43:02 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:43:03 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:43:04 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:43:15 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:43:16 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:43:17 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:43:17 PM - DEBUG - https://sh.lianjia.com:443 "GET /pg2chengjiao/pg2c5011000016470/ HTTP/1.1" 404 None
+02/14/2019 22:45:00 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:45:01 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:45:02 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:45:02 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/pg2c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:45:03 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:45:04 PM - DEBUG - https://sh.lianjia.com:443 "GET /chengjiao/pg3c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 22:50:57 PM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/14/2019 22:50:58 PM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None
+02/14/2019 23:57:39 PM - DEBUG - Starting new HTTP connection (1): www.dianping.com:80
+02/14/2019 23:57:39 PM - DEBUG - http://www.dianping.com:80 "GET /alashan HTTP/1.1" 200 None
+02/14/2019 23:57:42 PM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/14/2019 23:57:42 PM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/14/2019 23:57:42 PM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/14/2019 23:57:42 PM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/14/2019 23:57:42 PM - DEBUG - utf-8  confidence = 0.99
+02/14/2019 23:57:42 PM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - GB2312 Chinese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - EUC-KR Korean confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - CP949 Korean confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - Big5 Chinese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - windows-1251 Russian confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - KOI8-R Russian confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - ISO-8859-5 not active
+02/14/2019 23:57:42 PM - DEBUG - MacCyrillic not active
+02/14/2019 23:57:42 PM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/14/2019 23:57:42 PM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/14/2019 23:57:42 PM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/14/2019 23:57:42 PM - DEBUG - windows-1253 Greek confidence = 0.0
+02/14/2019 23:57:42 PM - DEBUG - ISO-8859-5 not active
+02/14/2019 23:57:42 PM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/14/2019 23:57:42 PM - DEBUG - TIS-620 not active
+02/14/2019 23:57:42 PM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/14/2019 23:57:42 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:57:42 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:57:42 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:57:42 PM - DEBUG - utf-8  confidence = 0.99
+02/14/2019 23:57:42 PM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - GB2312 Chinese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - EUC-KR Korean confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - CP949 Korean confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - Big5 Chinese confidence = 0.01
+02/14/2019 23:57:42 PM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/14/2019 23:58:14 PM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/14/2019 23:58:14 PM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/14/2019 23:58:14 PM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/14/2019 23:58:14 PM - DEBUG - utf-8  confidence = 0.99
+02/14/2019 23:58:14 PM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - GB2312 Chinese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - EUC-KR Korean confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - CP949 Korean confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - Big5 Chinese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - windows-1251 Russian confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - KOI8-R Russian confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - ISO-8859-5 not active
+02/14/2019 23:58:14 PM - DEBUG - MacCyrillic not active
+02/14/2019 23:58:14 PM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/14/2019 23:58:14 PM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/14/2019 23:58:14 PM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/14/2019 23:58:14 PM - DEBUG - windows-1253 Greek confidence = 0.0
+02/14/2019 23:58:14 PM - DEBUG - ISO-8859-5 not active
+02/14/2019 23:58:14 PM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/14/2019 23:58:14 PM - DEBUG - TIS-620 not active
+02/14/2019 23:58:14 PM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/14/2019 23:58:14 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:58:14 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:58:14 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:58:14 PM - DEBUG - utf-8  confidence = 0.99
+02/14/2019 23:58:14 PM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - GB2312 Chinese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - EUC-KR Korean confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - CP949 Korean confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - Big5 Chinese confidence = 0.01
+02/14/2019 23:58:14 PM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/14/2019 23:58:23 PM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/14/2019 23:58:23 PM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/14/2019 23:58:23 PM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/14/2019 23:58:23 PM - DEBUG - utf-8  confidence = 0.99
+02/14/2019 23:58:23 PM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - GB2312 Chinese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - EUC-KR Korean confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - CP949 Korean confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - Big5 Chinese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - windows-1251 Russian confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - KOI8-R Russian confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - ISO-8859-5 not active
+02/14/2019 23:58:23 PM - DEBUG - MacCyrillic not active
+02/14/2019 23:58:23 PM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/14/2019 23:58:23 PM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/14/2019 23:58:23 PM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/14/2019 23:58:23 PM - DEBUG - windows-1253 Greek confidence = 0.0
+02/14/2019 23:58:23 PM - DEBUG - ISO-8859-5 not active
+02/14/2019 23:58:23 PM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/14/2019 23:58:23 PM - DEBUG - TIS-620 not active
+02/14/2019 23:58:23 PM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/14/2019 23:58:23 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:58:23 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:58:23 PM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/14/2019 23:58:23 PM - DEBUG - utf-8  confidence = 0.99
+02/14/2019 23:58:23 PM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - GB2312 Chinese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - EUC-KR Korean confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - CP949 Korean confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - Big5 Chinese confidence = 0.01
+02/14/2019 23:58:23 PM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:11:31 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:11:31 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:11:31 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:11:31 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:11:31 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:11:31 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:11:31 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:11:31 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:11:31 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:11:31 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:11:31 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:11:31 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:11:31 AM - DEBUG - TIS-620 not active
+02/15/2019 00:11:31 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:11:31 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:11:31 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:11:31 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:11:31 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:11:31 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:11:31 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:11:58 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:11:58 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:11:58 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:11:58 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:11:59 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:11:59 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:11:59 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:11:59 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:11:59 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:11:59 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:11:59 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:11:59 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:11:59 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:11:59 AM - DEBUG - TIS-620 not active
+02/15/2019 00:11:59 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:11:59 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:11:59 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:11:59 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:11:59 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:11:59 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:11:59 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:12:18 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:12:18 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:12:18 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:12:18 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:12:18 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:12:18 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:12:18 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:12:18 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:12:18 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:12:18 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:12:18 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:12:18 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:12:18 AM - DEBUG - TIS-620 not active
+02/15/2019 00:12:18 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:12:18 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:18 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:18 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:18 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:12:18 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:12:18 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:12:25 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:12:25 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:12:25 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:12:25 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:12:25 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:12:25 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:12:25 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:12:25 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:12:25 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:12:25 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:12:25 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:12:25 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:12:25 AM - DEBUG - TIS-620 not active
+02/15/2019 00:12:25 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:12:25 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:25 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:25 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:25 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:12:25 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:12:25 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:12:31 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:12:31 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:12:31 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:12:31 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:12:31 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:12:31 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:12:31 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:12:31 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:12:31 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:12:31 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:12:31 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:12:31 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:12:31 AM - DEBUG - TIS-620 not active
+02/15/2019 00:12:31 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:12:31 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:31 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:31 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:12:31 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:12:31 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:12:31 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:13:14 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:13:14 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:13:14 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:13:14 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:13:14 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:13:14 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:13:14 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:13:14 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:13:14 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:13:14 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:13:14 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:13:14 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:13:14 AM - DEBUG - TIS-620 not active
+02/15/2019 00:13:14 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:13:14 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:13:14 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:13:14 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:13:14 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:13:14 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:13:14 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:18:51 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:18:51 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:18:51 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:18:51 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:18:51 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:18:51 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:18:51 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:18:51 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:18:51 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:18:51 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:18:51 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:18:51 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:18:51 AM - DEBUG - TIS-620 not active
+02/15/2019 00:18:51 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:18:51 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:18:51 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:18:51 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:18:51 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:18:51 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:18:51 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:19:14 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:19:14 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:19:14 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:19:14 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:19:14 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:19:14 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:19:14 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:19:14 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:19:14 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:19:14 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:19:14 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:19:14 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:19:14 AM - DEBUG - TIS-620 not active
+02/15/2019 00:19:14 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:19:14 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:19:14 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:19:14 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:19:14 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:19:14 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:19:14 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:23:09 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:23:09 AM - DEBUG - MacCyrillic confidence = 0.01422479234875779, below negative shortcut threshhold 0.05
+02/15/2019 00:23:10 AM - DEBUG - ISO-8859-5 confidence = 0.0, below negative shortcut threshhold 0.05
+02/15/2019 00:23:10 AM - DEBUG - TIS-620 confidence = 0.047174073833271414, below negative shortcut threshhold 0.05
+02/15/2019 00:23:10 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:23:10 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - windows-1251 Russian confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - KOI8-R Russian confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:23:10 AM - DEBUG - MacCyrillic not active
+02/15/2019 00:23:10 AM - DEBUG - IBM866 Russian confidence = 0.08349599052719107
+02/15/2019 00:23:10 AM - DEBUG - IBM855 Russian confidence = 0.06683585428557748
+02/15/2019 00:23:10 AM - DEBUG - ISO-8859-7 Greek confidence = 0.0
+02/15/2019 00:23:10 AM - DEBUG - windows-1253 Greek confidence = 0.0
+02/15/2019 00:23:10 AM - DEBUG - ISO-8859-5 not active
+02/15/2019 00:23:10 AM - DEBUG - windows-1251 Bulgarian confidence = 0.0
+02/15/2019 00:23:10 AM - DEBUG - TIS-620 not active
+02/15/2019 00:23:10 AM - DEBUG - ISO-8859-9 Turkish confidence = 0.5078688511190456
+02/15/2019 00:23:10 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:23:10 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:23:10 AM - DEBUG - windows-1255 Hebrew confidence = 0.0
+02/15/2019 00:23:10 AM - DEBUG - utf-8  confidence = 0.99
+02/15/2019 00:23:10 AM - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - EUC-JP Japanese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - GB2312 Chinese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - EUC-KR Korean confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - CP949 Korean confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - Big5 Chinese confidence = 0.01
+02/15/2019 00:23:10 AM - DEBUG - EUC-TW Taiwan confidence = 0.01
+02/15/2019 00:24:42 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/15/2019 00:24:43 AM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None
+02/15/2019 00:25:23 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/15/2019 00:25:24 AM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None
+02/15/2019 00:27:54 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/15/2019 00:27:55 AM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None

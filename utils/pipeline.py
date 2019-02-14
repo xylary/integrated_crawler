@@ -358,40 +358,69 @@ def get_xiaoqu_zufang_info(xiaoqu_id, city_abbr):
 def get_xiaoqu_ershoufang_info(xiaoqu_id, city_abbr):
 	ershoufang_info = []
 	base_url = 'https://{}.lianjia.com/ershoufang/c{}/'.format(city_abbr, xiaoqu_id)
-	h = request_lianjia_url(url=base_url, lib='bs4')
+	url = base_url
+	h = request_lianjia_url(url=url, lib='bs4')
 	total_pages = get_total_pages(h, page_type='ershoufang')
-	items = h.find_all('div', class_='content__list--item')
+	items = h.find_all('li', class_='clear LOGCLICKDATA')
 	for item in items:
 		info = {}
-		info['zufang_id'] = ''
-		info['zufang_title'] = ''
+		info['ershoufang_id'] = item.find('div', class_='title').find('a').attrs['data-housecode']
+		info['ershoufang_href'] = item.find('div', class_='title').find('a').attrs['href']
+		info['ershoufang_title'] = item.find('div', class_='title').find('a').text
+		info['xiaoqu_id'] = xiaoqu_id
+		info['xiaoqu_name'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[0]
 		info['city'] = city_abbr
-		info['district'] = ''
-		info['subdistrict'] = ''
-		info['area_sqm'] = ''
-		info['facing'] = ''
-		info['huxing'] = ''
-		info['brand'] = ''
-		info['post_days'] = ''
-		info['rent_rmb_per_month'] = ''
+		# info['district'] = ''
+		# info['subdistrict'] = ''
+		# House Properties
+		info['area_sqm'] = float(item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[2].replace('平米', ''))
+		info['facing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[3]
+		info['huxing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[1]
+		endpoint = item.find('div', class_='positionInfo').text.find(')') + 1
+		info['floor'] = item.find('div', class_='positionInfo').text[:endpoint]
+		info['year'] = item.find('div', class_='positionInfo').text[endpoint:].split('年')[0]
+		info['furbishing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[4]
+		info['elevator'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[5]
+		# House Sales Info
+		info['total_selling_price'] = int(item.find('div', class_='totalPrice').find('span').text)
+		info['unit_selling_price'] = int(item.find('div', class_='unitPrice').attrs['data-price'])
+		follow_info_texts = item.find('div', class_='followInfo').text.replace(' ', '').split('/')
+		info['watchers'] = int(follow_info_texts[0].replace('人关注', ''))
+		info['visits'] = int(follow_info_texts[1].replace('次带看', '').replace('共', ''))
+		info['post_days'] = follow_info_texts[2].replace('发布', '')
 		ershoufang_info.append(info)
 	for page in range(2, total_pages + 1):
-		url = base_url.replace('/c', '/pg{}c'.format(page))
+		time.sleep(1.0)
+		url = base_url.replace('/c' + xiaoqu_id, ('/pg{}c' + xiaoqu_id).format(page))
 		h = request_lianjia_url(url=url, lib='bs4')
-		items = h.find_all('div', class_='content__list--item')
+		items = h.find_all('li', class_='clear LOGCLICKDATA')
 		for item in items:
 			info = {}
-			info['zufang_id'] = ''
-			info['zufang_title'] = ''
+			info['ershoufang_id'] = item.find('div', class_='title').find('a').attrs['data-housecode']
+			info['ershoufang_href'] = item.find('div', class_='title').find('a').attrs['href']
+			info['ershoufang_title'] = item.find('div', class_='title').find('a').text
+			info['xiaoqu_id'] = xiaoqu_id
+			info['xiaoqu_name'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[0]
 			info['city'] = city_abbr
-			info['district'] = ''
-			info['subdistrict'] = ''
-			info['area_sqm'] = ''
-			info['facing'] = ''
-			info['huxing'] = ''
-			info['brand'] = ''
-			info['post_days'] = ''
-			info['rent_rmb_per_month'] = ''
+			# info['district'] = ''
+			# info['subdistrict'] = ''
+			# House Properties
+			info['area_sqm'] = float(
+				item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[2].replace('平米', ''))
+			info['facing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[3]
+			info['huxing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[1]
+			endpoint = item.find('div', class_='positionInfo').text.find(')') + 1
+			info['floor'] = item.find('div', class_='positionInfo').text[:endpoint]
+			info['year'] = item.find('div', class_='positionInfo').text[endpoint:].split('年')[0]
+			info['furbishing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[4]
+			info['elevator'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[5]
+			# House Sales Info
+			info['total_selling_price'] = int(item.find('div', class_='totalPrice').find('span').text)
+			info['unit_selling_price'] = int(item.find('div', class_='unitPrice').attrs['data-price'])
+			follow_info_texts = item.find('div', class_='followInfo').text.replace(' ', '').split('/')
+			info['watchers'] = int(follow_info_texts[0].replace('人关注', ''))
+			info['visits'] = int(follow_info_texts[1].replace('次带看', '').replace('共', ''))
+			info['post_days'] = int(follow_info_texts[1].replace('发布', ''))
 			ershoufang_info.append(info)
 	return ershoufang_info
 
@@ -399,40 +428,85 @@ def get_xiaoqu_ershoufang_info(xiaoqu_id, city_abbr):
 def get_xiaoqu_chengjiao_info(xiaoqu_id, city_abbr):
 	chengjiao_info = []
 	base_url = 'https://{}.lianjia.com/chengjiao/c{}/'.format(city_abbr, xiaoqu_id)
-	h = request_lianjia_url(url=base_url, lib='bs4')
+	url = base_url
+	h = request_lianjia_url(url=url, lib='bs4')
 	total_pages = get_total_pages(h, page_type='chengjiao')
-	items = h.find_all('div', class_='content__list--item')
+	items = h.find('ul', class_='listContent').find_all('li')
 	for item in items:
 		info = {}
-		info['zufang_id'] = ''
-		info['zufang_title'] = ''
+		info['chengjiao_href'] = item.find('div', class_='title').find('a').attrs['href']
+		info['chengjiao_title'] = item.find('div', class_='title').find('a').text
 		info['city'] = city_abbr
-		info['district'] = ''
-		info['subdistrict'] = ''
-		info['area_sqm'] = ''
-		info['facing'] = ''
-		info['huxing'] = ''
-		info['brand'] = ''
-		info['post_days'] = ''
-		info['rent_rmb_per_month'] = ''
+		# info['district'] = ''
+		# info['subdistrict'] = ''
+		info['area_sqm'] = float(item.find('div', class_='title').find('a').text.split(' ')[-1].replace('平米', ''))
+		spans = item.find('span', class_='dealCycleTxt').find_all('span')
+		if len(spans) == 2:
+			info['total_selling_price'] = int(spans[0].text.replace('挂牌', '').replace('万', ''))
+			info['post_to_deal_days'] = int(spans[1].text.replace('成交周期', '').replace('天', ''))
+		elif len(spans) == 1:
+			if spans[0].text.find('挂牌') > -1:
+				info['total_selling_price'] = int(spans[0].text.replace('挂牌', '').replace('万', ''))
+				info['post_to_deal_days'] = None
+			else:
+				info['total_selling_price'] = None
+				info['post_to_deal_days'] = int(spans[0].text.replace('成交周期', '').replace('天', ''))
+		else:
+			print('挂牌/成交周期 not correct in: ', url)
+			info['total_selling_price'] = None
+			info['post_to_deal_days'] = None
+		info['total_deal_price'] = int(item.find_all('span', class_='number')[0].text)
+		info['unit_deal_price'] = int(item.find_all('span', class_='number')[1].text)
+		info['deal_date'] = item.find('div', class_='dealDate').text.replace('.', '-')
+
+		info['facing'] = item.find('div', class_='houseInfo').text.replace('\xa0', '').replace(' ', '').split('|')[0]
+		info['huxing'] = item.find('div', class_='title').find('a').text.split(' ')[1]
+		info['floor'] = item.find('div', class_='positionInfo').text.split(' ')[0]
+		info['furbishing'] = item.find('div', class_='houseInfo').text.replace('\xa0','').replace(' ', '').split('|')[1]
+		info['elevator'] = item.find('div', class_='houseInfo').text.replace('\xa0','').replace(' ', '').split('|')[2]
+		info['year'] = item.find('div', class_='positionInfo').text.split(' ')[1].split('年')[0]
 		chengjiao_info.append(info)
 	for page in range(2, total_pages + 1):
-		url = base_url.replace('/c', '/pg{}c'.format(page))
+		time.sleep(1.0)
+		url = base_url.replace('/c' + xiaoqu_id, ('/pg{}c' + xiaoqu_id).format(page))
 		h = request_lianjia_url(url=url, lib='bs4')
-		items = h.find_all('div', class_='content__list--item')
+		items = h.find('ul', class_='listContent').find_all('li')
 		for item in items:
 			info = {}
-			info['zufang_id'] = ''
-			info['zufang_title'] = ''
+			info['chengjiao_href'] = item.find('div', class_='title').find('a').attrs['href']
+			info['chengjiao_title'] = item.find('div', class_='title').find('a').text
 			info['city'] = city_abbr
-			info['district'] = ''
-			info['subdistrict'] = ''
-			info['area_sqm'] = ''
-			info['facing'] = ''
-			info['huxing'] = ''
-			info['brand'] = ''
-			info['post_days'] = ''
-			info['rent_rmb_per_month'] = ''
+			# info['district'] = ''
+			# info['subdistrict'] = ''
+			info['area_sqm'] = float(item.find('div', class_='title').find('a').text.split(' ')[-1].replace('平米', ''))
+			spans = item.find('span', class_='dealCycleTxt').find_all('span')
+			if len(spans) == 2:
+				info['total_selling_price'] = int(spans[0].text.replace('挂牌', '').replace('万', ''))
+				info['post_to_deal_days'] = int(spans[1].text.replace('成交周期', '').replace('天', ''))
+			elif len(spans) == 1:
+				if spans[0].text.find('挂牌') > -1:
+					info['total_selling_price'] = int(spans[0].text.replace('挂牌', '').replace('万', ''))
+					info['post_to_deal_days'] = None
+				else:
+					info['total_selling_price'] = None
+					info['post_to_deal_days'] = int(spans[0].text.replace('成交周期', '').replace('天', ''))
+			else:
+				print('挂牌/成交周期 not correct in: ', url)
+				info['total_selling_price'] = None
+				info['post_to_deal_days'] = None
+			info['total_deal_price'] = int(item.find_all('span', class_='number')[0].text)
+			info['unit_deal_price'] = int(item.find_all('span', class_='number')[1].text)
+			info['deal_date'] = item.find('div', class_='dealDate').text.replace('.', '-')
+
+			info['facing'] = item.find('div', class_='houseInfo').text.replace('\xa0', '').replace(' ', '').split('|')[
+				0]
+			info['huxing'] = item.find('div', class_='title').find('a').text.split(' ')[1]
+			info['floor'] = item.find('div', class_='positionInfo').text.split(' ')[0]
+			info['furbishing'] = \
+			item.find('div', class_='houseInfo').text.replace('\xa0', '').replace(' ', '').split('|')[1]
+			info['elevator'] = \
+			item.find('div', class_='houseInfo').text.replace('\xa0', '').replace(' ', '').split('|')[2]
+			info['year'] = item.find('div', class_='positionInfo').text.split(' ')[1].split('年')[0]
 			chengjiao_info.append(info)
 	return chengjiao_info
 
