@@ -317,17 +317,18 @@ def get_xiaoqu_zufang_info(xiaoqu_id, city_abbr):
 	items = h.find_all('div', class_='content__list--item')
 	for item in items:
 		info = {}
-		info['zufang_id'] = ''
-		info['zufang_title'] = ''
+		info['zufang_id'] = item.find('div', class_='content__list--item--main').find('a').attrs['href']
+		info['zufang_title'] = item.find('div', class_='content__list--item--main').find('a').text.replace('\n', '').replace(' ', '')
 		info['city'] = city_abbr
-		info['district'] = ''
-		info['subdistrict'] = ''
-		info['area_sqm'] = ''
-		info['facing'] = ''
-		info['huxing'] = ''
-		info['brand'] = ''
-		info['post_days'] = ''
-		info['rent_rmb_per_month'] = ''
+		details = item.find('p', class_='content__list--item--des').text.replace(' ', '').replace('\n', '').split('/')
+		info['district'] = details[0].split('-')[0]
+		info['subdistrict'] = details[0].split('-')[1]
+		info['area_sqm'] = details[1].replace('㎡', '')
+		info['facing'] = details[2]
+		info['huxing'] = details[3]
+		info['floor'] = details[4]
+		info['post_days'] = item.find('p', class_='content__list--item--time oneline').text.replace('发布', '')
+		info['rent_rmb_per_month'] = int(item.find('em').text)
 		zufang_info.append(info)
 	for page in range(2, total_pages + 1):
 		url = base_url.replace('/c', '/pg{}c'.format(page))
@@ -335,17 +336,21 @@ def get_xiaoqu_zufang_info(xiaoqu_id, city_abbr):
 		items = h.find_all('div', class_='content__list--item')
 		for item in items:
 			info = {}
-			info['zufang_id'] = ''
-			info['zufang_title'] = ''
+			info['zufang_id'] = item.find('div', class_='content__list--item--main').find('a').attrs['href']
+			info['zufang_title'] = item.find('div', class_='content__list--item--main').find('a').text.replace('\n',
+																											   '').replace(
+				' ', '')
 			info['city'] = city_abbr
-			info['district'] = ''
-			info['subdistrict'] = ''
-			info['area_sqm'] = ''
-			info['facing'] = ''
-			info['huxing'] = ''
-			info['brand'] = ''
-			info['post_days'] = ''
-			info['rent_rmb_per_month'] = ''
+			details = item.find('p', class_='content__list--item--des').text.replace(' ', '').replace('\n', '').split(
+				'/')
+			info['district'] = details[0].split('-')[0]
+			info['subdistrict'] = details[0].split('-')[1]
+			info['area_sqm'] = details[1].replace('㎡', '')
+			info['facing'] = details[2]
+			info['huxing'] = details[3]
+			info['floor'] = details[4]
+			info['post_days'] = item.find('p', class_='content__list--item--time oneline').text.replace('发布', '')
+			info['rent_rmb_per_month'] = int(item.find('em').text)
 			zufang_info.append(info)
 	return zufang_info
 
