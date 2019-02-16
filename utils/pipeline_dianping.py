@@ -9,7 +9,7 @@ import sqlite3 as sql
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-logging.basicConfig(filename='logs/utils_pipeline_dianping.log', level=logging.DEBUG,
+logging.basicConfig(filename='logs/utils_pipeline_dianping.log', level=logging.WARNING,
                     format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %H:%M:%S %p")
 
 
@@ -19,32 +19,70 @@ headers = {
     'Cookie': '_lxsdk_cuid=168f43fde8fc8-02873e5fbb55ab-1333063-4b9600-168f43fde90c8; _lxsdk=168f43fde8fc8-02873e5fbb55ab-1333063-4b9600-168f43fde90c8; _hc.v=562e7bde-49a0-b88e-f02c-938dcdb43337.1550286053; s_ViewType=10; cy=1; cye=shanghai; _lxsdk_s=168f506de31-4ac-c5c-37%7C%7C183'
 }
 
-'''
-proxies = {
-    'https://www.dianping.com': 'http://10.10.1.10:5323'
-}
-'''
+r_counter = 0
+
+zm_proxy = [
+    '115.221.156.69:4217',
+    '42.4.216.8:4216',
+    '113.128.28.229:4242',
+    '180.118.68.139:4207',
+    '115.211.32.61:4242',
+    '182.34.26.125:9077',
+    '42.85.6.105:4287',
+    '118.120.204.210:4257',
+    '220.179.219.98:4276',
+    '106.226.229.8:5632',
+    '115.219.72.180:4232',
+    '111.72.104.51:4184',
+    '121.230.209.64:4236',
+    '114.103.29.190:4265',
+    '121.235.234.75:4232',
+    '114.105.171.201:4287',
+    '183.153.88.20:4258',
+    '42.56.0.225:4211',
+    '111.72.105.30:9756',
+    '125.111.150.32:4205'
+]
+
+item = 4
+proxies = [{
+    'http': 'http://' + zm_proxy[item],
+    'https': 'https://' + zm_proxy[item]
+}]
+
+proxies = []
 
 
-def request_dianping_url(url, method='GET', max_retries=5, **kwargs):
+def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
     counter = 0
     while True:
-        response = requests.request(method, url=url, headers=headers)
+        if len(proxies) == 0:
+            response = requests.request(method, url=url, headers=headers)
+        else:
+            response = requests.request(method, url=url, headers=headers, proxies=proxies[0])
+        global r_counter
+        r_counter += 1
         if response.status_code == 200:
             print(str(response.status_code) + ': ' + url)
             h = bs4.BeautifulSoup(response.content, 'lxml')
             if h.find('title').text == '验证中心':
-                print('需要验证： url = ', url)
+                with open('verify.html', 'w+', encoding='UTF-8', newline='') as html_file:
+                    html_file.write(str(h.prettify()))
+                print('需要验证 url, r-counter = ' + str(r_counter))
+                logging.error('R-counter = {} when verification is needed.'.format(str(r_counter)))
+                print(url)
                 input('请在完成验证后输入任意键继续：')
             else:
                 break
         else:
             print('Status Code = ', response.status_code)
             print('Retrying to fetch transactions...')
-            print(response.text)
             counter += 1
-            if counter > max_retries:
+            if counter >= max_retries:
                 print('Retries over {} times, program exit.'.format(str(max_retries)))
+                print('r_counter = ', r_counter)
+                logging.error('R-counter = {} when ip is blocked.'.format(r_counter))
+                logging.error('End url = ' + url)
                 exit(1)
             time.sleep(TIME_INTERVAL * 1.5)
 
