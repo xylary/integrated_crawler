@@ -4,8 +4,8 @@ import json
 
 
 
-def dict_to_sqlite_table(cursor, table_name, dict):
-    #for key, value in dict.items():
-    #    if
+def insert_dict_to_table(tblname, dict, cursor):
+    q = 'insert into {table_name} values {data}'
+    q = q.replace('{table_name}', tblname)
+    dict
     return
-

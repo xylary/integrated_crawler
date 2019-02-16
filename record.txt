@@ -1,7 +1,0 @@
-<div class="detailHeader fl">
-<div class="DetailFollow fr">
-<div class="xiaoquDetailbreadCrumbs" mod-id="lj-common-bread">
-<span class="xiaoquUnitPrice">
-<span class="xiaoquUnitPriceDesc">
-<span class="xiaoquInfoLabel"> -- 8
-<span class="xiaoquInfoContent"> -- 8
