@@ -17,9 +17,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 logging.basicConfig(filename='logs/utils_pipeline_dianping.log', level=logging.WARNING,
                     format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %H:%M:%S %p")
 
-TIME_INTERVAL = 3
-TIME_INTERVAL_TO_NEXT_PAGE = 1.0
-TIME_INTERVAL_TO_NEXT_CITY = 1.0
+TIME_INTERVAL_TO_NEXT_PAGE = 2.0
+TIME_INTERVAL_TO_NEXT_CITY = 2.0
 TIME_INTERVAL_RETRY = 2.0
 
 headers = {
@@ -36,7 +35,12 @@ def change_proxy():
     ip = get_ip_proxy_from_zhimadaili(num=1, target_url='https://www.dianping.com')[0]
     url_to_set_whitelist = \
         'http://web.http.cnapi.cc/index/index/save_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
+    url_to_del_whitelist = \
+        'http://web.http.cnapi.cc/index/index/del_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
     print(requests.get(url_to_set_whitelist + ip.split(':')[0]).text)
+    if PROXY != '':
+        time.sleep(2.0)
+        print(requests.get(url_to_del_whitelist + PROXY.split(':')[0]).text)
     PROXY = ip
     print('Reset new proxy as: ' + PROXY)
     return
@@ -54,7 +58,13 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
             'https': 'https://' + PROXY
         }
 
-        response = requests.request(method, url=url, headers=headers, proxies=proxies)
+        while True:
+            try:
+                response = requests.request(method, url=url, headers=headers, proxies=proxies, timeout=20)
+                break
+            except Exception as e:
+                logging.error(e)
+
         verify_counter += 1
         block_counter += 1
 
@@ -64,7 +74,7 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
             if h.find('title').text == '验证中心':
                 with open('verify.html', 'w+', encoding='UTF-8', newline='') as html_file:
                     html_file.write(str(h.prettify()))
-                print('需要验证 url, r-counter = ' + str(verify_counter))
+                print('需要验证, times of requests before verification is needed = ' + str(verify_counter))
                 logging.error('R-counter = {} when verification is needed.'.format(str(verify_counter)))
                 print(url)
                 print(proxies['https'])
@@ -85,11 +95,12 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
             counter += 1
             if counter >= max_retries:
                 print('Retries over {} times, program exit.'.format(str(max_retries)))
-                print('r_counter = ', block_counter)
+                print('Times of requests before IP is blocked = ', block_counter)
                 logging.error('R-counter = {} when ip is blocked.'.format(block_counter))
                 logging.error('End url = ' + url)
                 change_proxy()
                 block_counter = 0
+                counter = 0
             time.sleep(TIME_INTERVAL_RETRY)
 
     return h
@@ -154,7 +165,6 @@ def search_store_in_city(keywords, city_id):
 def search_restaurant_in_city(keywords, city_id):
     url = 'https://www.dianping.com/search/keyword/{}/10_{}'.format(str(city_id), keywords)
     h = request_dianping_url(url)
-    print(h.find('title').text)
     detail_csvfile = 'dianping_results/' + 'restaurant_details_' + keywords + '.csv'
     total_number = 0
     if h.find('div', class_='page') is None:
@@ -196,7 +206,6 @@ def search_restaurant_in_city(keywords, city_id):
         else:
             url = url.replace('/p' + str(cur_page - 1), '/p' + str(cur_page))
         h = request_dianping_url(url)
-        print(h.find('title').text)
     print('Found {} restaurant in city_id: {}.'.format(str(total_number), str(city_id)))
     return total_number
 

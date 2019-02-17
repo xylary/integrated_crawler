@@ -10,8 +10,8 @@ import pandas as pd
 
 df3 = pd.read_csv('dianping_results/nierson_city_list.csv', encoding='gbk')
 city_id_list = sorted(list(df3.meituan_city_id))
-keyword = '大脸鸡排'
-start_city_id = 158
+keyword = '多伦多海鲜自助'
+start_city_id = 290
 
 
 for city_id in city_id_list:

@@ -45,10 +45,10 @@ def get_ip_proxy_from_zhimadaili(num=1, target_url=None):
             if target_url is None:
                 target_url = 'http://www.baidu.com'
             try:
-                r = requests.get(target_url, headers=headers, proxies=proxies, timeout=3)
+                r = requests.get(target_url, headers=headers, proxies=proxies, timeout=5)
                 if r.status_code == 200:
                     return (proxy, expire_time)
-            except requests.exceptions.ProxyError as e:
+            except Exception as e:
                 logging.error(e)
         else:
             print(r.text)
