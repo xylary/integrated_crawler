@@ -1,4 +1,4 @@
-from utils.pipeline import *
+from utils.pipeline_lianjia import *
 
 # url = 'https://sh.lianjia.com/zufang/c5011000016470/'
 # h = request_lianjia_url(url, lib='bs4')

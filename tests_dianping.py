@@ -5,8 +5,11 @@ import pandas as pd
 #get_city_id('dianping_city_list.csv')
 
 
-keywords = ['悦荟餐饮', '萨贝尔', '佳客来牛排', '百特喜']
-start_city_id = 1
+keywords = ['萨贝尔', '佳客来牛排', '百特喜']
+start_city_id = 120
+
+
+proxy_pool = ['58.218.198.182:18787', '58.218.198.190:4188', '58.218.198.145:17362', '58.218.92.128:13537', '58.218.198.190:4578']
 
 df3 = pd.read_csv('dianping_results/nierson_city_list.csv', encoding='gbk')
 city_id_list = sorted(list(df3.meituan_city_id))

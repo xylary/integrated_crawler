@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os, re
 import time, datetime
 import requests
@@ -7,71 +9,74 @@ import js2py, execjs
 import csv
 import sqlite3 as sql
 import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+from .selenium_webdriver import *
+from .zhima_proxy import *
 
+
+ssl._create_default_https_context = ssl._create_unverified_context
 logging.basicConfig(filename='logs/utils_pipeline_dianping.log', level=logging.WARNING,
                     format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %H:%M:%S %p")
 
-
 TIME_INTERVAL = 3
+TIME_INTERVAL_TO_NEXT_PAGE = 1.0
+TIME_INTERVAL_TO_NEXT_CITY = 1.0
+TIME_INTERVAL_RETRY = 2.0
+
 headers = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
-    'Cookie': '_lxsdk_cuid=168f43fde8fc8-02873e5fbb55ab-1333063-4b9600-168f43fde90c8; _lxsdk=168f43fde8fc8-02873e5fbb55ab-1333063-4b9600-168f43fde90c8; _hc.v=562e7bde-49a0-b88e-f02c-938dcdb43337.1550286053; s_ViewType=10; cy=1; cye=shanghai; _lxsdk_s=168f506de31-4ac-c5c-37%7C%7C183'
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 }
+PROXY = ''
 
-r_counter = 0
+verify_counter = 0
+block_counter = 0
 
-zm_proxy = [
-    '115.221.156.69:4217',
-    '42.4.216.8:4216',
-    '113.128.28.229:4242',
-    '180.118.68.139:4207',
-    '115.211.32.61:4242',
-    '182.34.26.125:9077',
-    '42.85.6.105:4287',
-    '118.120.204.210:4257',
-    '220.179.219.98:4276',
-    '106.226.229.8:5632',
-    '115.219.72.180:4232',
-    '111.72.104.51:4184',
-    '121.230.209.64:4236',
-    '114.103.29.190:4265',
-    '121.235.234.75:4232',
-    '114.105.171.201:4287',
-    '183.153.88.20:4258',
-    '42.56.0.225:4211',
-    '111.72.105.30:9756',
-    '125.111.150.32:4205'
-]
 
-item = 4
-proxies = [{
-    'http': 'http://' + zm_proxy[item],
-    'https': 'https://' + zm_proxy[item]
-}]
-
-proxies = []
+def change_proxy():
+    global PROXY
+    ip = get_ip_proxy_from_zhimadaili(num=1, target_url='https://www.dianping.com')[0]
+    url_to_set_whitelist = \
+        'http://web.http.cnapi.cc/index/index/save_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
+    print(requests.get(url_to_set_whitelist + ip.split(':')[0]).text)
+    PROXY = ip
+    print('Reset new proxy as: ' + PROXY)
+    return
 
 
 def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
     counter = 0
+    global PROXY, verify_counter, block_counter
     while True:
-        if len(proxies) == 0:
-            response = requests.request(method, url=url, headers=headers)
-        else:
-            response = requests.request(method, url=url, headers=headers, proxies=proxies[0])
-        global r_counter
-        r_counter += 1
+        if PROXY == '':
+            change_proxy()
+
+        proxies = {
+            'http': 'http://' + PROXY,
+            'https': 'https://' + PROXY
+        }
+
+        response = requests.request(method, url=url, headers=headers, proxies=proxies)
+        verify_counter += 1
+        block_counter += 1
+
         if response.status_code == 200:
             print(str(response.status_code) + ': ' + url)
             h = bs4.BeautifulSoup(response.content, 'lxml')
             if h.find('title').text == '验证中心':
                 with open('verify.html', 'w+', encoding='UTF-8', newline='') as html_file:
                     html_file.write(str(h.prettify()))
-                print('需要验证 url, r-counter = ' + str(r_counter))
-                logging.error('R-counter = {} when verification is needed.'.format(str(r_counter)))
+                print('需要验证 url, r-counter = ' + str(verify_counter))
+                logging.error('R-counter = {} when verification is needed.'.format(str(verify_counter)))
                 print(url)
-                input('请在完成验证后输入任意键继续：')
+                print(proxies['https'])
+                b = init_browser(url, proxy=PROXY)
+                b.implicitly_wait(5)
+                while True:
+                    try:
+                        handles = b.window_handles
+                        time.sleep(0.5)
+                    except:
+                        verify_counter = 0
+                        break
             else:
                 break
         else:
@@ -80,11 +85,12 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
             counter += 1
             if counter >= max_retries:
                 print('Retries over {} times, program exit.'.format(str(max_retries)))
-                print('r_counter = ', r_counter)
-                logging.error('R-counter = {} when ip is blocked.'.format(r_counter))
+                print('r_counter = ', block_counter)
+                logging.error('R-counter = {} when ip is blocked.'.format(block_counter))
                 logging.error('End url = ' + url)
-                exit(1)
-            time.sleep(TIME_INTERVAL * 1.5)
+                change_proxy()
+                block_counter = 0
+            time.sleep(TIME_INTERVAL_RETRY)
 
     return h
 
@@ -107,7 +113,7 @@ def get_city_id(csvfilename):
                 end_point = str(h).find(",  // 城市id")
                 city_id = str(h)[start_point + 11:end_point - 1]
                 csvfile.write(city + ',' + city_url + ',' + city_id + '\n')
-                time.sleep(TIME_INTERVAL / 3)
+                time.sleep(TIME_INTERVAL_TO_NEXT_CITY)
     return city_ids
 
 
@@ -135,7 +141,7 @@ def search_store_in_city(keywords, city_id):
                 store_comment_url = li.find('div', class_='comment').find('a').attrs['href']
                 print(store_id, store_title, store_score, store_comment_url)
             cur_page += 1
-            time.sleep(2.0)
+            time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
             if cur_page == 2:
                 url = url + '/p' + str(cur_page)
             else:
@@ -147,7 +153,7 @@ def search_store_in_city(keywords, city_id):
 
 def search_restaurant_in_city(keywords, city_id):
     url = 'https://www.dianping.com/search/keyword/{}/10_{}'.format(str(city_id), keywords)
-    h = request_dianping_url(url, 'GET')
+    h = request_dianping_url(url)
     print(h.find('title').text)
     detail_csvfile = 'dianping_results/' + 'restaurant_details_' + keywords + '.csv'
     total_number = 0
@@ -184,13 +190,16 @@ def search_restaurant_in_city(keywords, city_id):
             print('Found {} restaurant in city_id: {}.'.format(str(0), str(city_id)))
             return total_number
         cur_page += 1
-        time.sleep(3.0)
+        time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
         if cur_page == 2:
             url = url + '/p' + str(cur_page)
         else:
             url = url.replace('/p' + str(cur_page - 1), '/p' + str(cur_page))
-        h = request_dianping_url(url, 'GET')
+        h = request_dianping_url(url)
         print(h.find('title').text)
     print('Found {} restaurant in city_id: {}.'.format(str(total_number), str(city_id)))
     return total_number
 
+
+def extract_restaurant_info_from_list(li_element):
+    return
