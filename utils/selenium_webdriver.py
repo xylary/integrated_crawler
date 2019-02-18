@@ -18,7 +18,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities a
 
 
 # Given the record information，Return a browser containing the index page (Max trials time = 5)
-def init_browser(url, headless=False, proxy=None, chrome_driver_path=r'C:\Users\kevin\PycharmProjects\real_estate\drivers\chromedriver.exe'):
+def init_browser(url, headless=False, proxy=None, chrome_driver_path=r'drivers/chromedriver.exe'):
 
     """
     user32 = windll.user32
