@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from utils.selenium_webdriver import *
+import datetime
 
 
 INIT_WAITTIME = 5
@@ -49,3 +50,52 @@ def searching_keywords_on_baidumap(keywords):
 
     print('All search results has been saved.')
     b.quit()
+
+
+def read_country_result(json_data):
+    info = dict()
+    try:
+        info['keyword'] = json_data['place_info']['search_ext'][0]['wd']
+    except Exception as e:
+        print('No Keyword founded, raw data: ', json_data)
+        info['keyword'] = 'NoKeyword'
+
+    info['city_result'] = []
+
+    if 'more_city' not in json_data.keys():
+        return info
+
+    for content in json_data['content']:
+        city_info = dict()
+        city_info['category'] = '热门城市'
+        city_info['city_id'] = content['code']
+        city_info['city_name'] = content['name']
+        city_info['city_num'] = content['num']
+        info['city_result'].append(city_info)
+
+    for province in json_data['more_city']:
+        province_name = province['province']
+        for city in province['city']:
+            city_info = dict()
+            city_info['category'] = province_name
+            city_info['city_id'] = city['code']
+            city_info['city_name'] = city['name']
+            city_info['city_num'] = city['num']
+            info['city_result'].append(city_info)
+    return info
+
+
+def write_cleaned_info_to_csv(info, path='data/baidumap_results/'):
+    save_filename = path + info['keyword'] + '_' + datetime.datetime.now().strftime('%Y%m%d') + '.csv'
+    if len(info['city_result']) == 0:
+        print('No results found in: ', info['keyword'])
+        return
+
+    with open(save_filename, 'w+', encoding='gbk', newline='') as f:
+        f.write('category,city_id,city_name,poi_num\n')
+        for city in info['city_result']:
+            line = city['category'] + ',' + str(city['city_id']) + ',' + \
+                   city['city_name'] + ',' + str(city['city_num']) + '\n'
+            f.write(line)
+    print('Successfully write results to: ', save_filename)
+    return

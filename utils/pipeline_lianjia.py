@@ -4,21 +4,19 @@ import requests, re
 from lxml import html
 import lxml.cssselect as cssselect
 import logging
-import js2py, execjs
 import bs4
 
 
 logging.basicConfig(filename='logs/utils_pipeline.log', level=logging.DEBUG,
-					format="%(asctime)s - %(levelname)s - %(message)s",
-					datefmt="%m/%d/%Y %H:%M:%S %p")
+					format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %H:%M:%S %p")
 
 TIME_INTERVAL = 3
+headers = {
+	"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+}
 
 
-def request_lianjia_url(url, method='GET', max_retries=5, **kwargs):
-	headers = {
-		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-	}
+def request_lianjia_url(url, method='GET', max_retries=3, **kwargs):
 	if 'cookie' in kwargs.keys():
 		headers['cookie'] = kwargs['cookie']
 	counter = 0
@@ -31,7 +29,7 @@ def request_lianjia_url(url, method='GET', max_retries=5, **kwargs):
 			print('Status Code = ', response.status_code)
 			print('Retrying to fetch transactions...')
 			counter += 1
-			if counter > max_retries:
+			if counter >= max_retries:
 				exit('Retries over {} times, program exit.'.format(str(max_retries)))
 			time.sleep(TIME_INTERVAL * 1.5)
 

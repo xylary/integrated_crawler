@@ -1,4 +1,5 @@
 from utils.pipeline_baidu_map import *
+import json
 
 
 keywords = [
@@ -187,6 +188,12 @@ keywords = [
 ]
 
 
-searching_keywords_on_baidumap(keywords)
+# searching_keywords_on_baidumap(keywords)
 
+with open('data/baidu_map_result_backup.txt', 'r+', encoding='UTF-8', newline='') as f:
+    lines = f.readlines()
 
+for line in lines:
+    r = json.loads(line)
+    info = read_country_result(r)
+    write_cleaned_info_to_csv(info)

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/data/baidumap_results/max burger_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidumap_results/上岛咖啡_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidumap_results/两岸咖啡_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidumap_results/乐而美_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidumap_results/麦卡基_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidumap_results/麦肯基_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/dianping_results/nierson_city_list.csv" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
