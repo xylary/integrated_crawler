@@ -11,9 +11,19 @@ from mitmproxy import ctx
 
 
 def request(flow):
-    """修改应答数据"""
-    if 'upstream_proxy=' in flow.request.url:
-        flow.request.url = flow.request.url.replace('baidu', 'qq')
+    if flow.request.method == 'CONNECT':
+        print('p1')
+        return
+    if flow.live:
+        if 'up=' in flow.request.url:
+            proxy = flow.request.url.split('up=')[1]
+            flow.request.url = flow.request.url.split('up=')[0]
+            print(proxy)
+            print(flow.request.url)
+            print(flow.request.pretty_url)
+            host = proxy.split(':')[0]
+            port = int(proxy.split(':')[1])
+            flow.live.change_upstream_proxy_server((host, port))
 
 
 def response(flow):
@@ -32,3 +42,4 @@ def response(flow):
             flow.response.text = flow.response.text.replace('"{}"'.format(webdriver_key), '"NO-SUCH-ATTR"')
             flow.response.text = flow.response.text.replace('t.webdriver', 'false')
             flow.response.text = flow.response.text.replace('ChromeDriver', '')
+        flow.response.text = flow.response.text.replace('if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}', 'g=this;')

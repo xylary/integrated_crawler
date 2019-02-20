@@ -5,7 +5,6 @@ import time, datetime
 import requests
 import lxml, bs4
 import logging
-import js2py, execjs
 import csv
 import sqlite3 as sql
 import ssl
@@ -24,6 +23,7 @@ TIME_INTERVAL_RETRY = 2.0
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 }
+
 PROXY = ''
 
 verify_counter = 0
@@ -33,14 +33,10 @@ block_counter = 0
 def change_proxy():
     global PROXY
     ip = get_ip_proxy_from_zhimadaili(num=1, target_url='https://www.dianping.com')[0]
-    url_to_set_whitelist = \
-        'http://web.http.cnapi.cc/index/index/save_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
-    url_to_del_whitelist = \
-        'http://web.http.cnapi.cc/index/index/del_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
-    print(requests.get(url_to_set_whitelist + ip.split(':')[0]).text)
     if PROXY != '':
-        time.sleep(2.0)
         print(requests.get(url_to_del_whitelist + PROXY.split(':')[0]).text)
+        time.sleep(2.0)
+    print(requests.get(url_to_set_whitelist + ip.split(':')[0]).text)
     PROXY = ip
     print('Reset new proxy as: ' + PROXY)
     return
@@ -72,13 +68,14 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
             print(str(response.status_code) + ': ' + url)
             h = bs4.BeautifulSoup(response.content, 'lxml')
             if h.find('title').text == '验证中心':
-                with open('verify.html', 'w+', encoding='UTF-8', newline='') as html_file:
+                with open('dev/verify.html', 'w+', encoding='UTF-8', newline='') as html_file:
                     html_file.write(str(h.prettify()))
                 print('需要验证, times of requests before verification is needed = ' + str(verify_counter))
                 logging.error('R-counter = {} when verification is needed.'.format(str(verify_counter)))
                 print(url)
                 print(proxies['https'])
-                b = init_browser(url, proxy=PROXY)
+                '''
+                b = init_browser(url + 'up=' + PROXY, proxy='127.0.0.1:8080')
                 b.implicitly_wait(5)
                 while True:
                     try:
@@ -87,6 +84,8 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
                     except:
                         verify_counter = 0
                         break
+                '''
+                change_proxy()
             else:
                 break
         else:
@@ -210,5 +209,10 @@ def search_restaurant_in_city(keywords, city_id):
     return total_number
 
 
-def extract_restaurant_info_from_list(li_element):
-    return
+def start_crawler(keyword, city_id_list, start_city_id):
+    for city_id in city_id_list:
+        if city_id >= start_city_id:
+            total_number_in_city = search_restaurant_in_city(keyword, city_id)
+            print('Total results in city: {}  == {}.'.format(str(city_id), str(total_number_in_city)))
+            time.sleep(2.0)
+    print(requests.get(url_to_del_whitelist + PROXY.split(':')[0]).text)

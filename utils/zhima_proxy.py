@@ -2,16 +2,20 @@
 
 import requests
 import logging
-logging.basicConfig(filename='logs/utils_pipeline_dianping.log', level=logging.WARNING,
-                    format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %H:%M:%S %p")
+import time
 
 pack = 40740
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 }
 
-def get_ip_proxy_from_zhimadaili(num=1, target_url=None):
+url_to_set_whitelist = \
+        'http://web.http.cnapi.cc/index/index/save_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
+url_to_del_whitelist = \
+        'http://web.http.cnapi.cc/index/index/del_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white='
 
+
+def get_ip_proxy_from_zhimadaili(num=1, target_url=None):
     zhima_url = 'http://webapi.http.zhimacangku.com/getip'
     global pack
     params = {
@@ -53,5 +57,6 @@ def get_ip_proxy_from_zhimadaili(num=1, target_url=None):
         else:
             print(r.text)
         counter += 1
+        time.sleep(2.0)
     print('Cannot get useful proxy, please check the source')
     exit(1)
