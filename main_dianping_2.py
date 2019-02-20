@@ -17,3 +17,14 @@ city_id_list = sorted(list(df_nierson.meituan_city_id))
 start_city_id = 1
 
 start_crawler(keyword, city_id_list, start_city_id)
+
+
+
+'''
+Unfinished searching:
+麦嘉基 13
+迈德思客 170
+动力鸡车 12
+多美味 123
+
+'''
