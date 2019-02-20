@@ -1,14 +1,6 @@
 from utils.pipeline_baidu_map import *
 
 
-b = init_browser('https://map.baidu.com', proxy='127.0.0.1:8080')
-time.sleep(5)
-b.find_element_by_xpath('//*[@id="ui3_city_change"]/a').click()
-time.sleep(2)
-b.find_element_by_xpath('//*[@id="selCityHotCityId"]/a[1]').click()
-time.sleep(5)
-
-
 keywords = [
 '麦乐基',
 '功夫鸡排',
@@ -195,16 +187,6 @@ keywords = [
 ]
 
 
-for word in keywords:
-    b.find_element_by_xpath('//*[@id="sole-input"]').click()
-    search(word, b)
-    time.sleep(3)
-    b.find_element_by_xpath('//*[@id="ui3_city_change"]/a').click()
-    time.sleep(2)
-    b.find_element_by_xpath('//*[@id="selCityHotCityId"]/a[1]').click()
-    time.sleep(5)
-    print('The results of the keyword: {} has been saved.'.format(word))
+searching_keywords_on_baidumap(keywords)
 
 
-print('All search results has been saved.')
-b.quit()
