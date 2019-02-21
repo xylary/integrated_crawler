@@ -55,13 +55,20 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
             'https': 'https://' + PROXY
         }
 
+        ProxyError_counter = 0
         while True:
             try:
                 response = requests.request(method, url=url, headers=headers, proxies=proxies, timeout=20)
                 break
             except Exception as e:
                 logging.error(e)
+                print(type(e))
                 print(e)
+                if isinstance(e, requests.exceptions.ProxyError):
+                    ProxyError_counter += 1
+                if ProxyError_counter > 3:
+                    change_proxy()
+                    ProxyError_counter = 0
 
         verify_counter += 1
         block_counter += 1
