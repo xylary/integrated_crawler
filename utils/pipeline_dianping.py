@@ -10,6 +10,7 @@ import sqlite3 as sql
 import ssl
 from .selenium_webdriver import *
 from .zhima_proxy import *
+import pandas as pd
 
 
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -60,6 +61,7 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
                 break
             except Exception as e:
                 logging.error(e)
+                print(e)
 
         verify_counter += 1
         block_counter += 1
@@ -171,7 +173,7 @@ def search_restaurant_in_city(keywords, city_id):
     else:
         total_pages = int(h.find('div', class_='page').find_all('a')[-2].attrs['data-ga-page'])
     cur_page = 1
-    while cur_page <= total_pages:
+    while True:
         not_found_div = h.find('div', class_='not-found')
         if not_found_div is None:
             shoplist = h.find('div', {'id': 'shop-all-list'})
@@ -198,15 +200,18 @@ def search_restaurant_in_city(keywords, city_id):
         else:
             print('Found {} restaurant in city_id: {}.'.format(str(0), str(city_id)))
             return total_number
+
         cur_page += 1
-        time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
-        if cur_page == 2:
-            url = url + '/p' + str(cur_page)
+        if cur_page <= total_pages:
+            time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
+            if cur_page == 2:
+                url = url + '/p' + str(cur_page)
+            else:
+                url = url.replace('/p' + str(cur_page - 1), '/p' + str(cur_page))
+            h = request_dianping_url(url)
         else:
-            url = url.replace('/p' + str(cur_page - 1), '/p' + str(cur_page))
-        h = request_dianping_url(url)
-    print('Found {} restaurant in city_id: {}.'.format(str(total_number), str(city_id)))
-    return total_number
+            print('Found {} restaurant in city_id: {}.'.format(str(total_number), str(city_id)))
+            return total_number
 
 
 def start_crawler(keyword, city_id_list, start_city_id):
@@ -216,3 +221,19 @@ def start_crawler(keyword, city_id_list, start_city_id):
             print('Total results in city: {}  == {}.'.format(str(city_id), str(total_number_in_city)))
             time.sleep(2.0)
     print(requests.get(url_to_del_whitelist + PROXY.split(':')[0]).text)
+
+
+def search_keyword_in_dianping(keyword, start_city_id=1):
+    # If using baidu map source:
+    # bdmap_result_csvfile = 'data/baidumap_results/{}_20190220.csv'.format(keyword)
+    df_nierson = pd.read_csv('dianping_results/nierson_city_list.csv', encoding='gbk')
+    city_id_list = sorted(list(df_nierson.meituan_city_id))
+    start_crawler(keyword, city_id_list, start_city_id)
+    print('Finished crawling info of: ', keyword)
+
+
+def clean_csv_results(csvfilename):
+    df = pd.read_csv(csvfilename, names=['city_id', 'keyword', 'dianping_shop_id', 'shop_title', 'stars', 'shop_url', 'state'])
+    df = df.drop_duplicates(keep='first')
+    df.to_csv(csvfilename.replace('.csv', '_cleaned.csv'))
+    print('Finished cleaning file: ' + csvfilename)

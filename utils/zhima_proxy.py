@@ -4,7 +4,7 @@ import requests
 import logging
 import time
 
-pack = 41058
+pack = 41052
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 }
@@ -51,6 +51,8 @@ def get_ip_proxy_from_zhimadaili(num=1, target_url=None):
             try:
                 r = requests.get(target_url, headers=headers, proxies=proxies, timeout=5)
                 if r.status_code == 200:
+                    with open('proxies/used_proxies.txt', 'a+', encoding='UTF-8', newline='') as f:
+                        f.write(proxy + ',' + expire_time + '\n')
                     return (proxy, expire_time)
             except Exception as e:
                 logging.error(e)
