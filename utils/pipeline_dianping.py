@@ -62,10 +62,11 @@ def request_dianping_url(url, method='GET', max_retries=3, **kwargs):
                 break
             except Exception as e:
                 logging.error(e)
-                print(type(e))
                 print(e)
                 if isinstance(e, requests.exceptions.ProxyError):
+                    print('Wait 10 seconds and then retry...')
                     ProxyError_counter += 1
+                    time.sleep(10)
                 if ProxyError_counter > 3:
                     change_proxy()
                     ProxyError_counter = 0
