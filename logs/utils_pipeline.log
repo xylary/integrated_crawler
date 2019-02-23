@@ -568,3 +568,15 @@
 02/15/2019 00:25:24 AM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None
 02/15/2019 00:27:54 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
 02/15/2019 00:27:55 AM - DEBUG - https://sh.lianjia.com:443 "GET /ershoufang/c5011000016470/ HTTP/1.1" 200 None
+02/23/2019 10:49:49 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/23/2019 10:49:49 AM - DEBUG - https://sh.lianjia.com:443 "GET / HTTP/1.1" 200 None
+02/23/2019 10:50:16 AM - DEBUG - Starting new HTTP connection (1): webapi.http.zhimacangku.com:80
+02/23/2019 10:50:17 AM - DEBUG - http://webapi.http.zhimacangku.com:80 "GET /getip?num=1&type=2&pro=0&city=0&regions=&yys=0&port=11&pack=41052&ts=1&ys=0&cs=0&lb=1&sb=0&pb=4&mr=1 HTTP/1.1" 200 None
+02/23/2019 10:50:17 AM - DEBUG - Starting new HTTP connection (1): 106.56.245.181:4237
+02/23/2019 10:50:18 AM - DEBUG - http://106.56.245.181:4237 "GET http://www.baidu.com/ HTTP/1.1" 302 225
+02/23/2019 10:50:18 AM - DEBUG - Starting new HTTPS connection (1): www.baidu.com:443
+02/23/2019 10:50:18 AM - DEBUG - https://www.baidu.com:443 "GET / HTTP/1.1" 200 None
+02/23/2019 10:50:18 AM - DEBUG - Starting new HTTP connection (1): web.http.cnapi.cc:80
+02/23/2019 10:50:19 AM - DEBUG - http://web.http.cnapi.cc:80 "GET /index/index/save_white?neek=62372&appkey=8bed538e6b8c36316ab16d634ec03868&white=106.56.245.181 HTTP/1.1" 200 None
+02/23/2019 10:50:19 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/23/2019 10:50:20 AM - DEBUG - https://sh.lianjia.com:443 "GET / HTTP/1.1" 200 None
