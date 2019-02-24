@@ -14,8 +14,15 @@
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_bj_20190223.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_sh_20190223.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_sz_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/changshoulu.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/dongzhimen.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/kangqiao.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/nanjingxilu.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/xintiandi.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/chengjiao/501100001812720190224.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/chengjiao/5011000018159_20190224.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/ershoufang/501100001791820190224.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/ershoufang/5011000018159_20190224.csv" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
