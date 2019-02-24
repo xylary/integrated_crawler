@@ -12,7 +12,10 @@
     <file url="file://$PROJECT_DIR$/data/dianping_results/raw/restaurant_details_上岛咖啡.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/lianjia_cities.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_bj_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_sh_20190223.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_sz_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/dongzhimen.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/kangqiao.csv" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
