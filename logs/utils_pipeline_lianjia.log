@@ -8034,3 +8034,17 @@ could not convert string to float: '101220Ôª/Æ½Ã×'
 02/25/2019 00:54:37 AM - DEBUG - https://sh.lianjia.com:443 "GET /zufang/c5011000017818/ HTTP/1.1" 200 None
 02/25/2019 00:55:05 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
 02/25/2019 00:55:05 AM - DEBUG - https://sh.lianjia.com:443 "GET /zufang/c5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:10:38 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:10:40 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:26:05 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:26:06 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:33:26 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:33:27 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:33:51 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:33:51 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:38:19 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:38:20 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:38:31 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:38:32 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None
+02/25/2019 01:39:31 AM - DEBUG - Starting new HTTPS connection (1): sh.lianjia.com:443
+02/25/2019 01:39:31 AM - DEBUG - https://sh.lianjia.com:443 "GET /xiaoqu/5011000017818/ HTTP/1.1" 200 None

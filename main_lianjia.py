@@ -11,4 +11,4 @@ url_subdistrict = 'http://sh.lianjia.com/xiaoqu/changshoulu/'
 # get_xiaoqu_info_in_subdistict(url_subdistrict)
 # get_xiaoqu_chengjiao_info(xiaoqu_id='5011000017818', city_abbr='sh')
 # get_xiaoqu_ershoufang_info(xiaoqu_id='5011000017818', city_abbr='sh')
-get_xiaoqu_zufang_info(xiaoqu_id='5011000017818', city_abbr='sh')
+# get_xiaoqu_detailed_info(xiaoqu_id='5011000017818', city_abbr='sh')

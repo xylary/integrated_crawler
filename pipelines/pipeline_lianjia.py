@@ -264,16 +264,16 @@ def get_xiaoqu_info_in_subdistict(subdistrict_url):
 	return info
 
 
-def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
+def get_xiaoqu_detailed_info(xiaoqu_id, city_abbr):
 	info = dict()
-	city_abbr = xiaoqu_url[xiaoqu_url.find('//') + 2 : xiaoqu_url.find('.')]
-	xiaoqu_id = xiaoqu_url.split('/')[-2]
-	h = request_url_without_proxy(xiaoqu_url, lib='bs4')
+	base_url = 'https://{}.lianjia.com/xiaoqu/{}/'
+	url = base_url.format(city_abbr, xiaoqu_id)
+	h = request_url_without_proxy(url)
 	try:
-		info['id'] = xiaoqu_id
-		info['name'] = h.find("h1", class_="detailTitle").text
+		info['xiaoqu_id'] = xiaoqu_id
+		info['xiaoqu_name'] = h.find("h1", class_="detailTitle").text
 		info['city'] = city_abbr
-		info['address'] = h.find("div", class_="detailDesc").text
+		info['address'] = h.find("div", class_="detailDesc").text.replace(',', '-')
 		info['followers'] = int(h.find('div', class_='detailFollowedNum').find('span').text)
 		info['hierarchy'] = h.find('div', class_='l-txt').text.replace('\xa0', ' ')
 		info['avg_unit_selling_price'] = float(h.find('span', class_='xiaoquUnitPrice').text)
@@ -303,16 +303,31 @@ def get_xiaoqu_detailed_info(xiaoqu_url, need_cookie=False):
 			info['total_apartments'] = -1
 		info['nearby_facilities'] = contents[7].text
 	except Exception as e:
-		msg = 'Exception encountered when getting info from: ' + xiaoqu_url + ' as: ' + str(e)
+		msg = 'Exception encountered when getting info from: ' + url + ' as: ' + str(e)
 		logging.debug(msg)
 		logging.debug(h.text_content())
 
-	zufang_url = xiaoqu_url.replace('xiaoqu/', 'zufang/c')
-	ershoufang_url = xiaoqu_url.replace('xiaoqu/', 'ershoufang/c')
-	chengjiao_url = xiaoqu_url.replace('xiaoqu/', 'chengjiao/c')
-	zf = request_url_without_proxy(zufang_url, lib='bs4')
-	es = request_url_without_proxy(ershoufang_url, lib='bs4')
-	cj = request_url_without_proxy(chengjiao_url, lib='bs4')
+	csvfilename = 'data/lianjia/xiaoqu_details/general/' + xiaoqu_id + '_' + info['xiaoqu_name'] + '.csv'
+
+	if not os.path.isfile(csvfilename):
+		with open(csvfilename, 'a+', encoding='gbk', newline='') as f:
+			headline = 'city,xiaoqu_id,xiaoqu_name,xiaoqu_address,hierachy,year,structure_type,developer,property_mgmt_corp,'
+			headline += 'total_buildings,total_apartments,nearby_facilities,maintenance_fee,avg_unit_selling_price,'
+			headline += 'followers,update_date\n'
+			f.write(headline)
+
+	with open(csvfilename, 'a', encoding='gbk', newline='') as f:
+		line = info['city'] + ',' + info['xiaoqu_id'] + ',' + info['xiaoqu_name'] + ',' + info['address'] + ','
+		line += info['hierarchy'] + ',' + str(info['year']) + ',' + info['structure_type'] + ','
+		line += info['developer'] + ',' + info['property_management_corp'] + ','
+		line += str(info['total_buildings']) + ',' + str(info['total_apartments']) + ',' + info['nearby_facilities'] + ','
+		line += str(info['maintenance_fee']) + ',' + str(info['avg_unit_selling_price']) + ','
+		line += str(info['followers']) + ',' + datetime.datetime.now().strftime('%Y-%m-%d') + '\n'
+		f.write(line)
+
+	# zf_info = get_xiaoqu_zufang_info(xiaoqu_id, city_abbr)
+	# esf_info = get_xiaoqu_ershoufang_info(xiaoqu_id, city_abbr)
+	# cj_info = get_xiaoqu_chengjiao_info(xiaoqu_id, city_abbr)
 	return info
 
 
@@ -365,7 +380,6 @@ def get_xiaoqu_zufang_info(xiaoqu_id, city_abbr):
 				time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
 				h = request_url_without_proxy(url=url)
 	return zufang_info
-
 
 
 def get_xiaoqu_ershoufang_info(xiaoqu_id, city_abbr):
