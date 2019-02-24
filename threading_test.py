@@ -11,7 +11,8 @@ def test_job(id):
     t = int(id)
     for i in range(100):
         t *= 2
-        print('Job ' + id + ' result: ' + str(t))
+        print('Job ' +
+              id + ' result: ' + str(t))
         time.sleep(1)
     print("Job {} finish.".format(id))
 

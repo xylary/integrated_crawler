@@ -1,11 +1,19 @@
 import matplotlib.font_manager as mfm
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
+from matplotlib.pylab import *
 
+# Setting Chinese Font
+mpl.rcParams['font.sans-serif'] = ['SimHei']
+mpl.rcParams['axes.unicode_minus'] = False
 
-font_path = "C:\Windows\Fonts\微软雅黑\微软雅黑 常规.ttf"
-prop = mfm.FontProperties(fname=font_path)
-plt.text(0.5, 0.5, s=u'测试', fontproperties=prop)
+df = pd.read_csv('data/lianjia/subdistrict_details_sh_20190223.csv', encoding='gbk')
+df.subdistrict_xiaoqu_num = df.subdistrict_xiaoqu_num.astype(int)
+group = df.groupby('district_name')
+df1 = group.aggregate(np.sum)
+df1.plot.bar()
 plt.show()
-
-# df = pd.read_csv('subdistrict_details_sh_20190223.csv')
+df = df[df.subdistrict_xiaoqu_num <= 1000]
+df[['subdistrict_name', 'subdistrict_xiaoqu_num']].plot.bar()
+plt.show()
