@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="dianping_data">
-  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.10">
+  <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.14">
     <root id="1">
       <ServerVersion>3.25.1</ServerVersion>
     </root>
@@ -40,13 +40,11 @@
     </column>
     <index id="13" parent="6" name="dianping_city_id_city_id_uindex">
       <ColNames>city_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="14" parent="6" name="sqlite_autoindex_dianping_city_id_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>city_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="15" parent="6">

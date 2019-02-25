@@ -41,7 +41,7 @@ def get_city_id(csvfilename):
 def search_restaurant_in_city(keywords, city_id):
     url = 'https://www.dianping.com/search/keyword/{}/10_{}'.format(str(city_id), keywords)
     h = request_url(url)
-    detail_csvfile = 'dianping_results/raw/' + 'restaurant_details_' + keywords + '.csv'
+    detail_csvfile = 'data/dianping_results/raw/' + 'restaurant_details_' + keywords + '.csv'
     total_number = 0
     if h.find('div', class_='page') is None:
         total_pages = 1

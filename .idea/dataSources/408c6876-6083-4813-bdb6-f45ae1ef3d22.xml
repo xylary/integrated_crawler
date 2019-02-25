@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="lianjia_data [2]">
-  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.10">
+  <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.14">
     <root id="1">
       <ServerVersion>3.25.1</ServerVersion>
     </root>
@@ -26,7 +26,6 @@
     </column>
     <index id="13" parent="6" name="xiaoqu_chengjiao_info_chengjiao_id_uindex">
       <ColNames>chengjiao_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <column id="14" parent="7" name="update_time">
@@ -107,7 +106,6 @@
     <index id="32" parent="7" name="sqlite_autoindex_ershoufang_info_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>update_time</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="33" parent="7">
@@ -225,12 +223,10 @@
     <index id="58" parent="10" name="sqlite_autoindex_xiaoqu_location_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>xiaoqu_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="59" parent="10" name="xiaoqu_location_xiaoqu_id_uindex">
       <ColNames>xiaoqu_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="60" parent="10">
@@ -245,7 +241,6 @@
     </column>
     <index id="62" parent="11" name="xiaoqu_zufang_info_href_uindex">
       <ColNames>href</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
   </database-model>

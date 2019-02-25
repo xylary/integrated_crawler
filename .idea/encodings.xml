@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/max burger_20190220.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/zoo coffee_20190220.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/上岛咖啡_20190220.csv" charset="GBK" />
@@ -19,12 +19,8 @@
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/kangqiao.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/nanjingxilu.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/xintiandi.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/chengjiao/501100001812720190224.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/chengjiao/5011000018159_20190224.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/ershoufang/501100001791820190224.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/ershoufang/5011000018159_20190224.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/general/5011000017818_万科兰乔圣菲.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/general/5011000017818_万科兰乔圣菲.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/ershoufang/2411100437885ES_20190225.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/general/2411100437885_宝能城.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/general/5011000017818_万科兰乔圣菲.csv" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

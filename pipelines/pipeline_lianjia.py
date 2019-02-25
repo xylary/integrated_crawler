@@ -421,7 +421,10 @@ def get_xiaoqu_ershoufang_info(xiaoqu_id, city_abbr):
 				info['floor'] = item.find('div', class_='positionInfo').text[:endpoint]
 				info['year'] = item.find('div', class_='positionInfo').text[endpoint:].split('年')[0]
 				info['furbishing'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[4]
-				info['elevator'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[5]
+				try:
+					info['elevator'] = item.find('div', class_='houseInfo').text.replace(' ', '').split('|')[5]
+				except IndexError:
+					info['elevator'] = 'IndexError'
 				# House Sales Info
 				info['total_selling_price'] = float(item.find('div', class_='totalPrice').find('span').text)
 				info['unit_selling_price'] = float(item.find('div', class_='unitPrice').attrs['data-price'])
@@ -466,7 +469,7 @@ def get_xiaoqu_chengjiao_info(xiaoqu_id, city_abbr):
 		f.write(headline)
 		while True:
 			items = h.find('ul', class_='listContent').find_all('li')
-			for item in items:
+			for idx, item in enumerate(items):
 				info = dict()
 				info['chengjiao_href'] = item.find('div', class_='title').find('a').attrs['href']
 				info['chengjiao_title'] = item.find('div', class_='title').find('a').text
@@ -478,21 +481,28 @@ def get_xiaoqu_chengjiao_info(xiaoqu_id, city_abbr):
 						item.find('div', class_='title').find('a').text.split(' ')[-1].replace('平米', ''))
 				except ValueError:
 					info['area_sqm'] = -1.0
-				spans = item.find('span', class_='dealCycleTxt').find_all('span')
-				if len(spans) == 2:
-					info['total_selling_price'] = float(spans[0].text.replace('挂牌', '').replace('万', ''))
-					info['post_to_deal_days'] = int(spans[1].text.replace('成交周期', '').replace('天', ''))
-				elif len(spans) == 1:
-					if spans[0].text.find('挂牌') > -1:
+				try:
+					spans = item.find('span', class_='dealCycleTxt').find_all('span')
+					if len(spans) == 2:
 						info['total_selling_price'] = float(spans[0].text.replace('挂牌', '').replace('万', ''))
-						info['post_to_deal_days'] = None
+						info['post_to_deal_days'] = int(spans[1].text.replace('成交周期', '').replace('天', ''))
+					elif len(spans) == 1:
+						if spans[0].text.find('挂牌') > -1:
+							info['total_selling_price'] = float(spans[0].text.replace('挂牌', '').replace('万', ''))
+							info['post_to_deal_days'] = None
+						else:
+							info['total_selling_price'] = None
+							info['post_to_deal_days'] = int(spans[0].text.replace('成交周期', '').replace('天', ''))
 					else:
+						print('挂牌/成交周期 not correct in: ', url)
+						print('The index of item is: ', idx)
 						info['total_selling_price'] = None
-						info['post_to_deal_days'] = int(spans[0].text.replace('成交周期', '').replace('天', ''))
-				else:
+						info['post_to_deal_days'] = None
+				except AttributeError:
 					print('挂牌/成交周期 not correct in: ', url)
 					info['total_selling_price'] = None
 					info['post_to_deal_days'] = None
+
 				info['total_deal_price'] = float(item.find_all('span', class_='number')[0].text)
 				info['unit_deal_price'] = float(item.find_all('span', class_='number')[1].text)
 				info['deal_date'] = item.find('div', class_='dealDate').text.replace('.', '-')
