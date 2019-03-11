@@ -1,0 +1,18 @@
+city,district_name,subdistrict_name,subdistrict_xiaoqu_num,subdistrict_url,review_date
+xy,谷城县,保康县,13,http://xy.lianjia.com/xiaoqu/baokangxian1/,2019-03-11
+xy,谷城县,谷城县,16,http://xy.lianjia.com/xiaoqu/guchengxian1/,2019-03-11
+xy,谷城县,老河口市,26,http://xy.lianjia.com/xiaoqu/laohekoushi1/,2019-03-11
+xy,保康县,保康县,13,http://xy.lianjia.com/xiaoqu/baokangxian1/,2019-03-11
+xy,保康县,宜城市,26,http://xy.lianjia.com/xiaoqu/yichengshi1/,2019-03-11
+xy,宜城市,None, 26 ,http://xy.lianjia.com/xiaoqu/yichengshi/,2019-03-11
+xy,老河口市,谷城县,16,http://xy.lianjia.com/xiaoqu/guchengxian1/,2019-03-11
+xy,老河口市,老河口市,26,http://xy.lianjia.com/xiaoqu/laohekoushi1/,2019-03-11
+xy,南漳县,南漳县,13,http://xy.lianjia.com/xiaoqu/nanzhangxian1/,2019-03-11
+xy,枣阳市,枣阳市,81,http://xy.lianjia.com/xiaoqu/zaoyangshi1/,2019-03-11
+xy,襄城区,襄城区,377,http://xy.lianjia.com/xiaoqu/xiangchengqu/,2019-03-11
+xy,襄城区,鱼梁洲,21,http://xy.lianjia.com/xiaoqu/yuliangzhou/,2019-03-11
+xy,襄州区,东津区,17,http://xy.lianjia.com/xiaoqu/dongjinqu/,2019-03-11
+xy,襄州区,高新区,67,http://xy.lianjia.com/xiaoqu/gaoxinqu5/,2019-03-11
+xy,襄州区,襄州区,99,http://xy.lianjia.com/xiaoqu/xiangzhouqu2/,2019-03-11
+xy,樊城区,樊城东区,638,http://xy.lianjia.com/xiaoqu/fanchengdongqu/,2019-03-11
+xy,樊城区,樊城西区,191,http://xy.lianjia.com/xiaoqu/fanchengxiqu/,2019-03-11

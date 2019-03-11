@@ -5,6 +5,7 @@ import time, datetime
 import re
 from utils.general_request import *
 import logging
+from utils.db_oper import *
 
 
 logging.basicConfig(filename='logs/utils_pipeline_lianjia.log', level=logging.DEBUG,
@@ -175,10 +176,10 @@ def get_house_info(house_url):
 	return info
 
 
-def get_xiaoqu_list(city='sh'):
-	review_date = datetime.datetime.now().strftime('%Y%m%d')
+def get_subdistrict_list_in_city(city='sh'):
+	review_date = datetime.datetime.now().strftime('%Y-%m-%d')
 	save_filename = 'data/lianjia/subdistrict_details_{}_{}.csv'.format(city, review_date)
-	headline = 'city,district_name,subdistrict_name,subdistrict_xiaoqu_num,subdistrict_url\n'
+	headline = 'city,district_name,subdistrict_name,subdistrict_xiaoqu_num,subdistrict_url,review_date\n'
 	with open(save_filename, 'w+', encoding='gbk', newline='') as f:
 		f.write(headline)
 
@@ -190,28 +191,33 @@ def get_xiaoqu_list(city='sh'):
 	for district in districts:
 		district_name = district.text
 		href_tag = district.attrs['href']
-		h2 = request_url_without_proxy(base_url + href_tag)
-		try:
-			subdistricts = h2.find('div', {'data-role': 'ershoufang'}).find_all('div')[1].find_all('a')
-			with open(save_filename, 'a+', encoding='gbk', newline='') as f:
-				for subdistrict in subdistricts:
-					subdistrict_name = subdistrict.text
-					subdistrict_url = base_url + subdistrict.attrs['href']
-					h3 = request_url_without_proxy(subdistrict_url)
-					subdistrict_xiaoqu_num = h3.find('h2', class_='total fl').find('span').text
-					line_list = [city, district_name, subdistrict_name, subdistrict_xiaoqu_num, subdistrict_url]
-					f.write(','.join(line_list) + '\n')
-					time.sleep(TIME_INTERVAL_SEARCH_SUBSTRICT)
-		except Exception as e:
-			if isinstance(e, IndexError):
-				subdistrict_name = 'None'
-				subdistrict_xiaoqu_num = h2.find('h2', class_='total fl').find('span').text
-				subdistrict_url = base_url + href_tag
-				line_list = [city, district_name, subdistrict_name, subdistrict_xiaoqu_num, subdistrict_url]
+		if u'://' not in href_tag:	# Ignore xiaoqu out of the current city
+			h2 = request_url_without_proxy(base_url + href_tag)
+			try:
+				subdistricts = h2.find('div', {'data-role': 'ershoufang'}).find_all('div')[1].find_all('a')
 				with open(save_filename, 'a+', encoding='gbk', newline='') as f:
-					f.write(','.join(line_list) + '\n')
+					for subdistrict in subdistricts:
+						subdistrict_name = subdistrict.text
+						subdistrict_url = base_url + subdistrict.attrs['href']
+						h3 = request_url_without_proxy(subdistrict_url)
+						subdistrict_xiaoqu_num = h3.find('h2', class_='total fl').find('span').text.replace(' ', '')
+						line_list = [city, district_name, subdistrict_name, subdistrict_xiaoqu_num, subdistrict_url,
+									 review_date]
+						f.write(','.join(line_list) + '\n')
+						time.sleep(TIME_INTERVAL_SEARCH_SUBSTRICT)
+			except Exception as e:
+				if isinstance(e, IndexError):
+					subdistrict_name = 'None'
+					subdistrict_xiaoqu_num = h2.find('h2', class_='total fl').find('span').text
+					subdistrict_url = base_url + href_tag
+					line_list = [city, district_name, subdistrict_name, subdistrict_xiaoqu_num, subdistrict_url,
+								 review_date]
+					with open(save_filename, 'a+', encoding='gbk', newline='') as f:
+						f.write(','.join(line_list) + '\n')
+
 		time.sleep(TIME_INTERVAL_SEARCH_SUBSTRICT)
 	print('Finished searching xiaoqu in city: ', city)
+	csv_to_sql(save_filename, db_path='data/lianjia_data.db', sql_tblname='subdistricts')
 
 
 def get_xiaoqu_info_in_subdistict(subdistrict_url):
@@ -535,5 +541,3 @@ def get_xiaoqu_chengjiao_info(xiaoqu_id, city_abbr):
 				time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
 				h = request_url_without_proxy(url=url)
 	return chengjiao_info
-
-
