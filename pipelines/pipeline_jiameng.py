@@ -72,7 +72,7 @@ def clean(s):
     return s
 
 
-def get_info(base_url='http://so.jiameng.com/xican/p{}/htm?sort=1', max_page=84):
+def get_info(base_url='http://so.jiameng.com/hubei_xican/p{}/htm?sort=1', max_page=84):
     list = []
     for i in range(1, max_page + 1):
         h = request_jiameng_url(url=base_url.format(str(i)))
