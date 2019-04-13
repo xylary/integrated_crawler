@@ -7,6 +7,6 @@ from pipelines.pipeline_dianping import *
 # clean_data()
 
 
-city_list = get_city_list(province='湖北')
+city_list = get_city_list(province='北京')
 for city_info in city_list:
     get_all_records(city_info, channel=10, group=116)

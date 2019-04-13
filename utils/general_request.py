@@ -11,10 +11,6 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 headers = {
 	'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
-	'cookie': '_lxsdk_cuid=168f43fde8fc8-02873e5fbb55ab-1333063-4b9600-168f43fde90c8;'
-			  ' _lxsdk=168f43fde8fc8-02873e5fbb55ab-1333063-4b9600-168f43fde90c8;'
-			  ' _hc.v=562e7bde-49a0-b88e-f02c-938dcdb43337.1550286053;'
-			  ' s_ViewType=10; cy=1; cye=shanghai; _lxsdk_s=16a0d361a61-f44-149-50c%7C%7C417'
 }
 
 PROXY = ''
