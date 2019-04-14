@@ -32,7 +32,10 @@ def change_proxy(test_url=None):
 
 
 def require_verification(bs4_html):
-	return bs4_html.find('title').text == '验证中心'
+	if bs4_html.find('title') is not None:
+		return bs4_html.find('title').text == '验证中心'
+	else:
+		return False
 
 
 def request_url(url, method='GET', max_retries=3, add_proxy=True, **kwargs):

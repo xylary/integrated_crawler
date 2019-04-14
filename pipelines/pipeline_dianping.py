@@ -53,6 +53,7 @@ PROVINCE_ID = {
 '澳门': 33,
 '台湾': 34
 }
+headers['cookie'] = 's_ViewType=10;'
 
 
 def get_city_id(csvfilename):
@@ -77,159 +78,20 @@ def get_city_id(csvfilename):
     return city_ids
 
 
+def get_city_list(province):
+    province_id = PROVINCE_ID[province]
+    r = requests.post('http://www.dianping.com/ajax/citylist/getDomesticCityByProvince',
+                      json={'provinceId': province_id})
+    city_list = json.loads(r.content)['cityList']
+    return city_list
+
+
 def get_total_pages(h):
     if h.find('div', class_='page') is None:
         total_pages = 1
     else:
         total_pages = int(h.find('div', class_='page').find_all('a')[-2].attrs['data-ga-page'])
     return total_pages
-
-
-def get_all_restaurants_in_results(url, to_csv, add_proxy=True):
-    h = request_url(url, add_proxy=add_proxy)
-    total_number = 0
-    total_pages = get_total_pages(h)
-    cur_page = 1
-    while True:
-        not_found_div = h.find('div', class_='not-found')
-        if not_found_div is None:
-            shoplist = h.find('div', {'id': 'shop-all-list'})
-            if shoplist is not None:
-                lis = shoplist.find_all('li')
-                total_number += len(lis)
-                with open(to_csv, 'a+', encoding='UTF-8', newline='') as f:
-                    for li in lis:
-                        store_title = li.find('div', class_='tit').find('a').attrs['title']
-                        store_id = li.find('div', class_='tit').find('a').attrs['data-shopid']
-                        store_score = li.find('div', class_='comment').find('span').attrs['title']
-                        store_comment_url = li.find('div', class_='comment').find('a').attrs['href']
-                        store_status = li.find('span', class_='istopTrade')
-                        if store_status is None:
-                            line = store_id + ',' + store_title + ',' + store_score + ',' + store_comment_url + ',\n'
-                        elif store_status.text != '歇业/关闭':
-                            line = store_id + ',' + store_title + ',' + store_score + ',' + store_comment_url + ',歇业/关闭\n'
-                        else:
-                            line = store_id + ',' + store_title + ',' + store_score + ',' + store_comment_url + ',' + store_status.text + '\n'
-                        f.write(line)
-        else:
-            print('Found {} restaurant in url: {}.'.format(str(0), url))
-            return total_number
-
-        cur_page += 1
-        if cur_page <= total_pages:
-            time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
-            if cur_page == 2:
-                url = url + 'p' + str(cur_page)
-            else:
-                url = url.replace('p' + str(cur_page - 1), 'p' + str(cur_page))
-            h = request_url(url, add_proxy=add_proxy)
-        else:
-            print('Found {} restaurant in url: {}.'.format(str(total_number), url))
-            return total_number
-
-
-def search_restaurant_in_city(keywords, city_id):
-    url = 'https://www.dianping.com/search/keyword/{}/10_{}'.format(str(city_id), keywords)
-    h = request_url(url)
-    detail_csvfile = 'data/dianping/raw/' + 'restaurant_details_' + keywords + '.csv'
-    total_number = 0
-    total_pages = get_total_pages(h)
-    cur_page = 1
-    while True:
-        not_found_div = h.find('div', class_='not-found')
-        if not_found_div is None:
-            shoplist = h.find('div', {'id': 'shop-all-list'})
-            if shoplist is not None:
-                lis = shoplist.find_all('li')
-                total_number += len(lis)
-                with open(detail_csvfile, 'a+', encoding='UTF-8', newline='') as f:
-                    for li in lis:
-                        store_title = li.find('div', class_='tit').find('a').attrs['title']
-                        store_id = li.find('div', class_='tit').find('a').attrs['data-shopid']
-                        store_score = li.find('div', class_='comment').find('span').attrs['title']
-                        store_comment_url = li.find('div', class_='comment').find('a').attrs['href']
-                        store_status = li.find('span', class_='istopTrade')
-                        if store_status is None:
-                            line = str(city_id) + ',' + keywords + ',' + store_id + ',' + store_title + \
-                                   ',' + store_score + ',' + store_comment_url + ',\n'
-                        elif store_status.text != '歇业/关闭':
-                            line = str(city_id) + ',' + keywords + ',' + store_id + ',' + store_title + \
-                                   ',' + store_score + ',' + store_comment_url + ',歇业/关闭\n'
-                        else:
-                            line = str(city_id) + ',' + keywords + ',' + store_id + ',' + store_title + \
-                                   ',' + store_score + ',' + store_comment_url + ',' + store_status.text + '\n'
-                        f.write(line)
-        else:
-            print('Found {} restaurant in city_id: {}.'.format(str(0), str(city_id)))
-            return total_number
-
-        cur_page += 1
-        if cur_page <= total_pages:
-            time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
-            if cur_page == 2:
-                url = url + '/p' + str(cur_page)
-            else:
-                url = url.replace('/p' + str(cur_page - 1), '/p' + str(cur_page))
-            h = request_url(url)
-        else:
-            print('Found {} restaurant in city_id: {}.'.format(str(total_number), str(city_id)))
-            return total_number
-
-
-def start_crawler(keyword, city_id_list, start_city_id):
-    for city_id in city_id_list:
-        if city_id >= start_city_id:
-            total_number_in_city = search_restaurant_in_city(keyword, city_id)
-            print('Total results in city: {}  == {}.'.format(str(city_id), str(total_number_in_city)))
-            time.sleep(2.0)
-    print(requests.get(url_to_del_whitelist + PROXY.split(':')[0]).text)
-
-
-def search_keyword_in_dianping(keyword, start_city_id=1):
-    # If using baidu map source:
-    # bdmap_result_csvfile = 'data/baidumap_results/{}_20190220.csv'.format(keyword)
-    df_nierson = pd.read_csv('data/dianping/nierson_city_list.csv', encoding='gbk')
-    city_id_list = sorted(list(df_nierson.meituan_city_id))
-    start_crawler(keyword, city_id_list, start_city_id)
-    print('Finished crawling info of: ', keyword)
-
-
-def clean_csv_results(csvfilename):
-    try:
-        df = pd.read_csv(csvfilename,
-                         names=['city_id', 'keyword', 'dianping_shop_id', 'shop_title', 'stars', 'shop_url', 'state'],
-                         encoding='UTF-8')
-    except UnicodeDecodeError as e1:
-        df = pd.read_csv(csvfilename,
-                         names=['city_id', 'keyword', 'dianping_shop_id', 'shop_title', 'stars', 'shop_url', 'state'],
-                         encoding='gbk')
-    except Exception as e2:
-        print('Exception found when cleaning: ', csvfilename)
-        print(e2)
-        return
-    finally:
-        df = df.drop_duplicates(keep='first')
-        new_name = csvfilename.replace('raw', 'cleaned')
-        df.to_csv(new_name, encoding='utf-8')
-        print('Finished cleaning file: ' + csvfilename)
-
-
-def clean_data(path='data/dianping/raw/'):
-    for root, dirs, files in os.walk(path, topdown=False):
-        for name in files:
-            if name not in ['dianping_city_list.csv', 'nierson_city_list.csv']:
-                clean_csv_results(path + name)
-    print('Finished cleaning data.')
-
-
-def merge_cleaned_data(folder_path='dianping/cleaned/'):
-    dfs = []
-    for root, dirs, files in os.walk(folder_path, topdown=False):
-        for name in files:
-            df = pd.read_csv(folder_path + name, encoding='gbk')
-            dfs.append(df)
-    df = pd.concat(dfs)
-    df.to_csv('dianping_cleaned_in_one.csv', encoding='gbk')
 
 
 def get_category_page_urls_in_city(city_url):
@@ -252,17 +114,9 @@ def get_all_records(city_info, channel, group):
     hrefs = get_category_page_urls_in_city(url)
     total_records = 0
     for href in hrefs:
-        total_records += get_all_restaurants_in_results(href, csvfilename, add_proxy=True)
+        total_records += get_all_restaurants_from_result_url(href, csvfilename, add_proxy=True)
     print('Total records in {} channel {} group {} = {}'.format(city, str(channel), str(group), str(total_records)))
     return total_records
-
-
-def get_city_list(province):
-    province_id = PROVINCE_ID[province]
-    r = requests.post('http://www.dianping.com/ajax/citylist/getDomesticCityByProvince',
-                      json={'provinceId': province_id})
-    city_list = json.loads(r.content)['cityList']
-    return city_list
 
 
 def update_css(bs4_elem, replace_needed=False):
@@ -284,7 +138,7 @@ def update_css(bs4_elem, replace_needed=False):
                 if replace_needed:
                     print('Updating css file: ' + filename)
                     print('css file source: ' + css_url)
-                    r = requests.get(css_url, headers=headers)
+                    r = request_url(css_url)
                     if r.status_code == 200:
                         with open(path + filename, 'w+', encoding='UTF-8', newline='') as f:
                             f.write(r.text)
@@ -348,7 +202,7 @@ def update_svg(svg_hrefs, replace_needed=False):
         if not os.path.exists(path + filename):
             print('Adding new svg file: ' + filename)
             print('svg file source: ' + bg_img_url)
-            r = requests.get(bg_img_url, headers=headers)
+            r = request_url(bg_img_url)
             if r.status_code == 200:
                 with open(path + filename, 'w+', encoding='UTF-8', newline='') as f:
                     f.write(r.text)
@@ -356,7 +210,7 @@ def update_svg(svg_hrefs, replace_needed=False):
             if replace_needed:
                 print('Updating svg file: ' + filename)
                 print('svg file source: ' + bg_img_url)
-                r = requests.get(bg_img_url, headers=headers)
+                r = request_url(bg_img_url)
                 if r.status_code == 200:
                     with open(path + filename, 'w+', encoding='UTF-8', newline='') as f:
                         f.write(r.text)
@@ -495,20 +349,30 @@ def get_info_of_li(li_elem, codes, svg_hrefs):
     icons = []
     if len(promo_icons) > 0:
         for promo_icon in promo_icons:
-            icons.append(promo_icon.attrs['data-click-name'])
+            icon_string = promo_icon.attrs['data-click-name']
+            icon_string = re.sub('shop|icon|click|_', '', icon_string)
+            icons.append(icon_string)
 
     if tit.find('a', {'data-click-name': 'shop_icon_ad_click'}) is not None:
-        is_advertising = 1
+        is_advertising = 'Y'
     else:
-        is_advertising = 0
+        is_advertising = 'N'
 
+    if tit.find('span', class_='istopTrade') is not None:
+        is_stop_trade = 'Y'
+    else:
+        is_stop_trade = 'N'
 
     # .comment information
-    stars = comment.find('span', class_='sml-rank-stars').attrs['title']
-    review_num = convert_contents(comment.find('a', class_='review-num').find('b').contents,
-                                  codes, svg_hrefs)
-    mean_price = convert_contents(comment.find('a', class_='mean-price').find('b').contents,
-                                  codes, svg_hrefs)
+    try:
+        stars = comment.find('span', class_='sml-rank-stars').attrs['title']
+        review_num = convert_contents(comment.find('a', class_='review-num').find('b').contents, codes, svg_hrefs)
+        mean_price = convert_contents(comment.find('a', class_='mean-price').find('b').contents, codes, svg_hrefs)
+    except Exception as e:
+        print(e)
+        stars = 'CrawlingFailed'
+        review_num = 'CrawlingFailed'
+        mean_price = 'CrawlingFailed'
 
 
     # .tag-addr information
@@ -524,14 +388,15 @@ def get_info_of_li(li_elem, codes, svg_hrefs):
         'shop_id': shop_id,
         'shop_title': shop_title,
         'shop_href': shop_href,
-        'icons': icons,
-        'is_advertising': is_advertising,
         'stars': stars,
         'review_num': review_num,
         'mean_price': mean_price,
         'category': category,
         'region': region,
-        'address': address
+        'address': address,
+        'icons': icons,
+        'is_advertising': is_advertising,
+        'is_stop_trade': is_stop_trade
     }
 
     return info
@@ -549,14 +414,13 @@ def convert_contents(contents, codes, svg_hrefs):
     return line
 
 
-def get_all_restaurants_info(url, to_csv, add_proxy=True):
+def get_all_restaurants_from_result_url(url, to_csv, add_proxy=True, cur_page=1, replace_css=True, replace_svg=False):
     h = request_url(url, add_proxy=add_proxy)
-    css_filename = update_css(h, replace_needed=True)
+    css_filename = update_css(h, replace_needed=replace_css)
     codes, svg_hrefs = analyze_css(css_filename)
-    update_svg(svg_hrefs, replace_needed=True)
+    update_svg(svg_hrefs, replace_needed=replace_svg)
     total_number = 0
     total_pages = get_total_pages(h)
-    cur_page = 1
     while True:
         not_found_div = h.find('div', class_='not-found')
         if not_found_div is None:
@@ -566,8 +430,14 @@ def get_all_restaurants_info(url, to_csv, add_proxy=True):
                 total_number += len(lis)
                 for li in lis:
                     li_info = get_info_of_li(li, codes, svg_hrefs)
-                    for k, v in li_info.items():
-                        print(k, v)
+                    line = li_info['shop_id'] + ',' + li_info['shop_title'] + ',' + li_info['shop_href'] + ',' + \
+                           li_info['stars'] + ',' + li_info['review_num'] + ',' + li_info['mean_price'] + ',' + \
+                           li_info['category'] + ',' + li_info['region'] + ',' + li_info['address'] + ',' + \
+                           li_info['is_advertising'] + ',' + li_info['is_stop_trade'] + ',' + \
+                           ' & '.join(li_info['icons']) + '\n'
+                    with open(to_csv, 'a+', encoding='UTF-8', newline='') as f:
+                        f.write(line)
+
         else:
             print('Found {} restaurant in url: {}.'.format(str(0), url))
             return total_number
@@ -575,11 +445,77 @@ def get_all_restaurants_info(url, to_csv, add_proxy=True):
         cur_page += 1
         if cur_page <= total_pages:
             time.sleep(TIME_INTERVAL_TO_NEXT_PAGE)
+            referer_url = url
             if cur_page == 2:
                 url = url + 'p' + str(cur_page)
             else:
                 url = url.replace('p' + str(cur_page - 1), 'p' + str(cur_page))
+            headers['referer'] = referer_url
             h = request_url(url, add_proxy=add_proxy)
         else:
             print('Found {} restaurant in url: {}.'.format(str(total_number), url))
             return total_number
+
+
+def search_restaurant_in_city(keywords, city_id):
+    url = 'https://www.dianping.com/search/keyword/{}/10_{}'.format(str(city_id), keywords)
+    detail_csvfile = 'data/dianping/raw/' + 'restaurant_details_' + keywords + '.csv'
+    total_number = get_all_restaurants_from_result_url(url, detail_csvfile)
+    print('Total number of shop {} in city_id = {} is: {}'.format(keywords, city_id, total_number))
+    return total_number
+
+
+def start_crawler(keyword, city_id_list, start_city_id):
+    for city_id in city_id_list:
+        if city_id >= start_city_id:
+            total_number_in_city = search_restaurant_in_city(keyword, city_id)
+            print('Total results in city: {}  == {}.'.format(str(city_id), str(total_number_in_city)))
+            time.sleep(2.0)
+    print(requests.get(url_to_del_whitelist + PROXY.split(':')[0]).text)
+
+
+def search_keyword_in_dianping(keyword, start_city_id=1):
+    # If using baidu map source:
+    # bdmap_result_csvfile = 'data/baidumap_results/{}_20190220.csv'.format(keyword)
+    df_nierson = pd.read_csv('data/dianping/nierson_city_list.csv', encoding='gbk')
+    city_id_list = sorted(list(df_nierson.meituan_city_id))
+    start_crawler(keyword, city_id_list, start_city_id)
+    print('Finished crawling info of: ', keyword)
+
+
+def clean_csv_results(csvfilename):
+    try:
+        df = pd.read_csv(csvfilename,
+                         names=['city_id', 'keyword', 'dianping_shop_id', 'shop_title', 'stars', 'shop_url', 'state'],
+                         encoding='UTF-8')
+    except UnicodeDecodeError as e1:
+        df = pd.read_csv(csvfilename,
+                         names=['city_id', 'keyword', 'dianping_shop_id', 'shop_title', 'stars', 'shop_url', 'state'],
+                         encoding='gbk')
+    except Exception as e2:
+        print('Exception found when cleaning: ', csvfilename)
+        print(e2)
+        return
+    finally:
+        df = df.drop_duplicates(keep='first')
+        new_name = csvfilename.replace('raw', 'cleaned')
+        df.to_csv(new_name, encoding='utf-8')
+        print('Finished cleaning file: ' + csvfilename)
+
+
+def clean_data(path='data/dianping/raw/'):
+    for root, dirs, files in os.walk(path, topdown=False):
+        for name in files:
+            if name not in ['dianping_city_list.csv', 'nierson_city_list.csv']:
+                clean_csv_results(path + name)
+    print('Finished cleaning data.')
+
+
+def merge_cleaned_data(folder_path='dianping/cleaned/'):
+    dfs = []
+    for root, dirs, files in os.walk(folder_path, topdown=False):
+        for name in files:
+            df = pd.read_csv(folder_path + name, encoding='gbk')
+            dfs.append(df)
+    df = pd.concat(dfs)
+    df.to_csv('dianping_cleaned_in_one.csv', encoding='gbk')
