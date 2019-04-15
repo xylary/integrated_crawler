@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/max burger_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/zoo coffee_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/上岛咖啡_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/两岸咖啡_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/乐而美_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/麦卡基_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/baidu_map/baidumap_results/麦肯基_20190220.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/dianping/nierson_city_list.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/dianping/raw/restaurant_details_上岛咖啡.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/lianjia_cities.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_aq_2019-03-11.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_bj_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_hz_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_sh_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_details_sz_20190223.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/changshoulu.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/dongzhimen.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/hubin1.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/kangqiao.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/nanjingxilu.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/subdistrict_xiaoqu_list/xintiandi.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/ershoufang/2411100437885ES_20190225.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/general/2411100437885_宝能城.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/lianjia/xiaoqu_details/general/5011000017818_万科兰乔圣菲.csv" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

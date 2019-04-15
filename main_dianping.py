@@ -1,17 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from utils.pipeline_dianping import *
-import pandas as pd
+from pipelines.pipeline_dianping import *
+
+# search_keyword_in_dianping('肯德基', start_city_id=105)
+# clean_data()
 
 
-#get_city_id('dianping_city_list.csv')
-
-
-df3 = pd.read_csv('dianping_results/nierson_city_list.csv', encoding='gbk')
-city_id_list = sorted(list(df3.meituan_city_id))
-keyword = '麦卡基'
-start_city_id = 71
-
-
-start_crawler(keyword, city_id_list, start_city_id)
+city_list = get_city_list(province='北京')
+for city_info in city_list:
+    get_all_records(city_info, channel=10, group=116)
